@@ -8,7 +8,7 @@ async function scrapeProduct(url: string): Promise<void> {
     const [el] = await page.$x('//*[@id="pdp_comp-product_media"]/div/div[1]/div/div[2]/img');
     // const src = await el.getProperty('style');
     // const srcTxt =  await src.jsonValue();
-    // console.log(el);
+    console.log(url);
     
 
     browser.close();
