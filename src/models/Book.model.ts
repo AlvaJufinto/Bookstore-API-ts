@@ -1,16 +1,14 @@
-const mongoose = require("mongoose");
-
-const { Schema, model } = mongoose;
+import mongoose, { Schema, model } from 'mongoose';
 
 require("dotenv").config();
 
 const BookModel = new Schema({
     author: {       
-        type: mongoose.Types.OnjectId,
+        type: mongoose.Types.ObjectId,
         ref: "post",
     },
     publisher: {
-        type: mongoose.Types.OnjectId,
+        type: mongoose.Types.ObjectId,
         ref: "publisher",
     },
     title: {
