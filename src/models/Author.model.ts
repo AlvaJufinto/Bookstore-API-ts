@@ -5,7 +5,7 @@ require("dotenv").config();
 interface IAuthor {
     belongsto?: mongoose.Types.ObjectId;
     firstName: string;
-    lastName: string;
+    lastName?: string;
     country: string;
 } 
 
@@ -13,15 +13,14 @@ const AuthorModel = new Schema<IAuthor>({
     belongsto : {
         type : mongoose.Types.ObjectId,
         required : [true, "Field needs to be filled"],
-        ref : "Book"
+        ref : "book"
     },
     firstName: {
         type: String,
-        required: true,
+        required: [true, "Firstname needs to be filled"],
     },
     lastName: {
         type: String,
-        required: true,
     },
     country: {
         type: String,
