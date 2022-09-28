@@ -5,13 +5,16 @@ require("dotenv").config();
 interface IBook {
     author?: mongoose.Types.ObjectId;
     publisher?: mongoose.Types.ObjectId;
-    title: string;
+    title?: string;
     ISBN: string;
     genre: string[];
     publicationDate: Date;
+    price: Number;
+    profilePict: String;
+    condition: String;
 }
 
-const BookModel = new Schema({
+const BookModel = new Schema<IBook>({
     author: {       
         type: mongoose.Types.ObjectId,
         ref: "post",
@@ -44,12 +47,7 @@ const BookModel = new Schema({
         required : [true, "Price needs to be filled"],
     },
     profilePict : {
-        imageUrl : {
-            type : String
-        },
-        imageID : {
-            type : String
-        }
+        type: String,
     },
     condition: {
         type: String,
