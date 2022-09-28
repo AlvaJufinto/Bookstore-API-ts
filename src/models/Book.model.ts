@@ -2,6 +2,15 @@ import mongoose, { Schema, model } from 'mongoose';
 
 require("dotenv").config();
 
+interface IBook {
+    author?: mongoose.Types.ObjectId;
+    publisher?: mongoose.Types.ObjectId;
+    title: string;
+    ISBN: string;
+    genre: string[];
+    publicationDate: Date;
+}
+
 const BookModel = new Schema({
     author: {       
         type: mongoose.Types.ObjectId,
@@ -26,9 +35,9 @@ const BookModel = new Schema({
             required : [true, "Genre needs to be filled"]
         }
     ],
-    publicationYear : {
-        type: String,
-        required : [true, "Publication year needs to be filled"],
+    publicationDate : {
+        type: Date,
+        required : [true, "Publication date needs to be filled"],
     },
     price : {
         type: Number,

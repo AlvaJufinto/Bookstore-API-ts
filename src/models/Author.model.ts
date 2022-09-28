@@ -2,7 +2,14 @@ import mongoose, { Schema, model } from 'mongoose';
 
 require("dotenv").config();
 
-const AuthorModel = new Schema({
+interface IAuthor {
+    belongsto?: mongoose.Types.ObjectId;
+    firstName: string;
+    lastName: string;
+    country: string;
+} 
+
+const AuthorModel = new Schema<IAuthor>({
     belongsto : {
         type : mongoose.Types.ObjectId,
         required : [true, "Field needs to be filled"],
