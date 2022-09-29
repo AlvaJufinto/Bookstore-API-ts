@@ -9,9 +9,9 @@ interface IBook {
     ISBN: string;
     genre: string[];
     publicationDate: Date;
-    price: Number;
-    profilePict: String;
-    condition: String;
+    price: number;
+    profilePict: string;
+    condition: string;
 }
 
 const BookModel = new Schema<IBook>({
