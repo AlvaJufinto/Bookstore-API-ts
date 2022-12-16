@@ -1,57 +1,18 @@
-import express, { Express, Request, Response } from 'express';
-import mongoose, { dbConfig } from 'mongoose';
-import cors from "cors";
-import bodyParser from 'body-parser';
-import dotenv from 'dotenv';
+import express from 'express';
+import connect from './utils/connect';
 
-dotenv.config();
+import adminRouter from './routes/admin.route';
 
-const app: Express = express();
 const port = process.env.PORT || 5000;
+const app = express();
 
-app.use(cors({
-	origin: "*",
-	credentials : true
-}))
 app.use(express.json());
-app.use(bodyParser.urlencoded({
-    extended : true
-}))
+app.use('/api/admin', adminRouter);
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-  
+
+app.listen(port, async () => {
+    console.log(`App is running at http://localhost:${port}`);
+
+    await connect();
+
 });
-// const clientRouter  = require("./router/client_router");
-// const authRouter    = require("./router/Auth_router");
-// const userRouter    = require("./router/user_router");
-// const adminRouter   = require("./router/Admin_router");
-// const cors = require("cors");
-
-app.use(cors({
-	origin: "*",
-	credentials : true
-}))
-app.use(express.json());
-app.use(bodyParser.urlencoded({
-    extended : true
-}))
-
-// routes caller
-// app.use("/api/client",clientRouter);
-// app.use("/api/auth",authRouter);
-// app.use("/api/user",userRouter);
-// app.use("/api/admin",adminRouter);
-
-mongoose.connect(dbConfig())
-    .then(()=> {
-        console.log("db started");
-        app.listen(process.env.PORT || port, () =>{
-            console.log("app started")
-        })
-    })
-    .catch((e)=>{
-        console.log(e);
-        console.log("db failed to connect")
-    })
-
