@@ -1,7 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-require("dotenv").config();
-
 interface IBook {
     author?: mongoose.Types.ObjectId;
     publisher?: mongoose.Types.ObjectId;
@@ -14,7 +12,7 @@ interface IBook {
     condition: string;
 }
 
-const BookModel = new Schema<IBook>({
+const BookSchema = new Schema<IBook>({
     author: {       
         type: mongoose.Types.ObjectId,
         ref: "post",
@@ -56,4 +54,5 @@ const BookModel = new Schema<IBook>({
     }
 });
 
-module.exports = model("book", BookModel);
+const BookModel = mongoose.model<IBook>("User", BookSchema);
+export default BookModel;

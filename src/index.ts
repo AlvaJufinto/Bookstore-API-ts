@@ -1,14 +1,27 @@
 import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+
 import connect from './utils/connect';
 
-import adminRouter from './routes/admin.route';
+import healthRoute from './routes/health.route';
+import adminRoute from './routes/admin.route';
 
 const port = process.env.PORT || 5000;
 const app = express();
 
-app.use(express.json());
-app.use('/api/admin', adminRouter);
+app.use(cors({
+	origin: "*",
+	credentials : true
+}))
 
+app.use(express.json());
+app.use(bodyParser.urlencoded({
+    extended : true
+}));
+
+app.use('/api', healthRoute);
+app.use('/api/admin', adminRoute);
 
 app.listen(port, async () => {
     console.log(`App is running at http://localhost:${port}`);
@@ -16,3 +29,4 @@ app.listen(port, async () => {
     await connect();
 
 });
+

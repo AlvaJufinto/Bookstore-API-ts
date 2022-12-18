@@ -1,7 +1,5 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
 
-require("dotenv").config();
-
 interface IOrderItem {
     books?: mongoose.Types.ObjectId[];
     customer?: mongoose.Types.ObjectId;
@@ -10,7 +8,7 @@ interface IOrderItem {
     shippingName: string;
 }
 
-const OrderItemModel = new Schema<IOrderItem>({
+const OrderItemSchema = new Schema<IOrderItem>({
     books: [
         {
             type: mongoose.Types.ObjectId,
@@ -37,4 +35,5 @@ const OrderItemModel = new Schema<IOrderItem>({
     },
 })
 
-module.exports = model("orderItem", OrderItemModel);
+const OrderItemModel = mongoose.model<IOrderItem>("User", OrderItemSchema);
+export default OrderItemModel;

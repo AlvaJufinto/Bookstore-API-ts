@@ -3,8 +3,8 @@ import { Router } from 'express';
 
 const adminRoute = Router();
 
-adminRoute.post('/add/admin', () => {
-
+adminRoute.post('/admin/login', () => {
+    
 })
 
 export default adminRoute;

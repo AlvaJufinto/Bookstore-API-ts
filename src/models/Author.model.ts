@@ -1,7 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-require("dotenv").config();
-
 interface IAuthor {
     belongsto?: mongoose.Types.ObjectId;
     firstName: string;
@@ -9,7 +7,7 @@ interface IAuthor {
     country: string;
 } 
 
-const AuthorModel = new Schema<IAuthor>({
+const AuthorSchema = new Schema<IAuthor>({
     belongsto : {
         type : mongoose.Types.ObjectId,
         required : [true, "Field needs to be filled"],
@@ -28,4 +26,5 @@ const AuthorModel = new Schema<IAuthor>({
     }
 });
 
-module.exports = model("author", AuthorModel);
+const AuthorModel = mongoose.model<IAuthor>("User", AuthorSchema);
+export default AuthorModel;

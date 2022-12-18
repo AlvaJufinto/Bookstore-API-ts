@@ -1,7 +1,4 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
-
-require("dotenv").config();
-
 interface ICustomer {
     belongsto?: mongoose.Types.ObjectId;
     firstName: string;
@@ -13,7 +10,7 @@ interface ICustomer {
     phoneNumber: string;
 }
 
-const CustomerModel = new Schema<ICustomer>({
+const CustomerSchema = new Schema<ICustomer>({
     belongsto: {
         type: mongoose.Types.ObjectId,
         required: [true, "Field needs to be filled"],
@@ -49,4 +46,5 @@ const CustomerModel = new Schema<ICustomer>({
     }
 })
 
-module.exports = model("customer", CustomerModel);
+const CustomerModel = mongoose.model<ICustomer>("User", CustomerSchema);
+export default CustomerModel;
