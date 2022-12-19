@@ -14,8 +14,19 @@ export async function signJwt(id: string): Promise<string | boolean> {
 }
 
 export async function verifyJwt(token: string) {
-    // token = token 
-    // const decoded = await jwt.verify(token, process.env.SECRET_TOKEN as string);
+    try {
+        const decoded = await jwt.verify(token, process.env.SECRET_TOKEN as string);
 
-    // return 
+        return {
+            valid: true,
+            expired: false, 
+            decoded,
+        }
+    } catch (err) {
+        return {
+            valid: false,
+            expired: err,
+            decoded: null,
+        }
+    }
 }

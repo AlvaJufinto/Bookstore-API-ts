@@ -7,34 +7,37 @@ import { signJwt } from "./../utils/jwt.util";
 export async function authLogin(req: Request, res: Response) {
     const { username, password } = req.body;
 
-    if(username && password) {
-        let admin;
+    let admin;
 
-        admin = await AdminModel.findOne({ 
-            username: username as string    
-        });
+    admin = await AdminModel.findOne({ 
+        username: username as string    
+    });
 
-        if(admin) {
-            const match = await bcrypt.compare(password, admin.password);
-            const token = await signJwt(admin._id as unknown as string);
+    if(admin) {
+        const match = await bcrypt.compare(password, admin.password);
+        const token = await signJwt(admin._id as unknown as string);
 
-            console.log("token", token);
-
-            if(match) {
-                return res.status(200).json({
-                    ok : true,
-                    message : "Success",
-                    token: token,
-                })
-            }
+        if(match) {
+            return res.status(200).json({
+                ok : true,
+                message : "Login Success",
+                token,
+            })
         }
-        return res.status(401).json({
-            ok : false,
-            message : "Wrong Password or Username"
-        })
-    } 
-    return res.status(400).json({
+    }
+    return res.status(401).json({
         ok : false,
-        message: "Dude, you fucked up the JSON body"
+        message : "Wrong password or username"
     })
-}
+} 
+
+export async function getAuthData(req: Request, res: Response) {
+    return res.status(200).json({
+        ok : true,
+        message : "Data retrieved successfully",
+        data: {
+            username: "admin"
+        }
+    })
+} 
+

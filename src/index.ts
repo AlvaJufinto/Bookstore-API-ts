@@ -25,8 +25,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/api/', healthRoute);
-app.use('/api/admin', adminRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/admin', adminRoute);
 
 app.listen(port, async () => {
     console.log(`App is running at http://localhost:${port}`);
