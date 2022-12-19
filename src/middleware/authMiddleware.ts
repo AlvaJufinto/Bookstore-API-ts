@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
-import { verifyJwt } from "..//utils/jwt.util";
+import AdminModel from "../models/Admin.model";
+import { verifyJwt } from "../utils/jwt.util";
 
 export async function authentication(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
@@ -20,4 +21,21 @@ export async function authentication(req: Request, res: Response, next: NextFunc
         ok : false,
         message : "Token not found"
     })
+} 
+
+export async function authenticationAdmin(req: Request, res: Response, next: NextFunction) {
+    const adminId = res.locals.user.uid;
+    let admin;
+
+    admin = await AdminModel.findOne({ 
+        id: adminId as string    
+    });
+
+    if(admin?.role !== 'admin') {
+        return res.status(403).json({
+            ok: false,
+            message: "Access denied"
+        });
+    }
+    next();
 } 

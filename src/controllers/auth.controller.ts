@@ -32,10 +32,11 @@ export async function authLogin(req: Request, res: Response) {
 } 
 
 export async function getAuthData(req: Request, res: Response) {
-    const adminId = res.locals.user.uid;
+    const adminId: string = res.locals.user.uid;
     const admin = await AdminModel.findOne({
         id: adminId
-    })
+    });
+
     if(admin) {
         return res.status(200).json({
             ok: true,
@@ -48,6 +49,7 @@ export async function getAuthData(req: Request, res: Response) {
             }
         })
     }
+    
     return res.status(404).json({
         ok: false,
         message: "Admin not found",
