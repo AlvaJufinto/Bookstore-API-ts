@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-interface IAdmin {
+export interface IAdmin {
     username: string;
     password: string;
     role: string;
@@ -22,5 +22,5 @@ const AdminSchema = new Schema<IAdmin>({
     }
 });
 
-const AdminModel = mongoose.model<IAdmin>("User", AdminSchema);
+const AdminModel = mongoose.model<IAdmin>("Admin", AdminSchema);
 export default AdminModel;

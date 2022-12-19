@@ -1,10 +1,10 @@
 import express from 'express';
 import { Router } from 'express';
 
-const adminRoute = Router();
+import { authLogin } from './../controllers/auth.controller';
 
-adminRoute.post('/admin/login', () => {
-    
-})
+const authRoute = Router();
 
-export default adminRoute;
+authRoute.post('/login', authLogin)
+
+export default authRoute;

@@ -17,5 +17,5 @@ const PublisherSchema = new Schema<IPublisher>({
     }
 });
 
-const PublisherModel = mongoose.model<IPublisher>("User", PublisherSchema);
+const PublisherModel = mongoose.model<IPublisher>("Publisher", PublisherSchema);
 export default PublisherModel;
