@@ -7,7 +7,7 @@ import { authLogin, getAuthData } from './../controllers/auth.controller';
 
 const authRoute = Router();
 
-authRoute.post('/login', validateLogin, authLogin)
-authRoute.get('/get-data', authentication, getAuthData)
+authRoute.post('/login', validateLogin, authLogin);
+authRoute.get('/get-data', authentication, getAuthData);
 
 export default authRoute;

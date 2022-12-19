@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import AdminModel, { IAdmin } from "./../models/Admin.model";
+import AdminModel from "./../models/Admin.model";
 import { signJwt } from "./../utils/jwt.util";
 
 export async function authLogin(req: Request, res: Response) {
@@ -26,18 +26,31 @@ export async function authLogin(req: Request, res: Response) {
         }
     }
     return res.status(401).json({
-        ok : false,
-        message : "Wrong password or username"
+        ok: false,
+        message: "Wrong password or username"
     })
 } 
 
 export async function getAuthData(req: Request, res: Response) {
-    return res.status(200).json({
-        ok : true,
-        message : "Data retrieved successfully",
-        data: {
-            username: "admin"
-        }
+    const adminId = res.locals.user.uid;
+    const admin = await AdminModel.findOne({
+        id: adminId
+    })
+    if(admin) {
+        return res.status(200).json({
+            ok: true,
+            message: "Data retrieved successfully",
+            data: {
+                username: admin?.username,
+                fullname: admin?.fullname,
+                description: admin?.description,
+                role: admin?.role,
+            }
+        })
+    }
+    return res.status(404).json({
+        ok: false,
+        message: "Admin not found",
     })
 } 
 
