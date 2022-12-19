@@ -1,5 +1,8 @@
 import mongoose, { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 export interface IAdmin {
     username: string;
@@ -7,7 +10,6 @@ export interface IAdmin {
     password: string;
     description: string;
     role: string;
-    
 } 
 
 const AdminSchema = new Schema<IAdmin>({
@@ -18,34 +20,31 @@ const AdminSchema = new Schema<IAdmin>({
     },
     fullname: {
         type: String,
-        required: false,
     },
     description: {
         type: String,
-        required: false,
-    },
-    password: {
-        type: String,
-        required: [true, "Password needs to be filled"],
     },
     role: {
         type: String,
         enum: ["viewer", "editor", "admin"],
         default: "admin" 
+    },
+    password: {
+        type: String,
+        required: [true, "Password needs to be filled"],
     }
 });
 
+
 AdminSchema.pre("save", async function(next: any) {
-    let admin = this as IAdmin;
+    let admin = this;
     
-    // if(!admin?.isModified('password')) {
-    //     return next();
-    // }
+    if(!admin?.isModified('password')) {
+        return next();
+    }
 
-    const salt = await bcrypt.genSalt(12);
+    const salt = await bcrypt.genSalt(Number(process.env.GEN_SALT));
     const hashedPassword = await bcrypt.hashSync(admin.password, salt);
-
-    console.log("hashedPassword", hashedPassword)
 
     admin.password = hashedPassword;
 

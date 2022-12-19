@@ -7,8 +7,6 @@ export async function addAdmin(req: Request, res: Response) {
     try {
         const { username, fullname, password, description, role } = req.body;
 
-        console.log(req.body);
-
         const user = await AdminModel.create({
             username,
             fullname,
@@ -20,11 +18,17 @@ export async function addAdmin(req: Request, res: Response) {
         return res.status(200).json({
             ok: true,
             message: "Admin added successfully",
+            data: {
+                username,
+                fullname,
+                description,
+                role,
+            }
         });
     } catch (err: any) {
         return res.status(400).json({
             ok: false,
-            message: err.message
+            message: err.message,
         })
         
     }
