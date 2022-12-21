@@ -63,7 +63,6 @@ export async function showAdmin(req: Request, res: Response) {
             message: "Admin fetched successfully",
             data: { ...rest },
         });
-
     } catch (err: any) {
         return res.status(404).json({
             ok: false,
@@ -74,13 +73,19 @@ export async function showAdmin(req: Request, res: Response) {
 
 export async function deleteAdmin(req: Request, res: Response) {
     try {
-        const admin: any = await Admin.deleteOne({ _id: req.params.id }).lean();
-        
+        const admin: any = await Admin.findOne({ _id: req.params.id }).lean();
+        await Admin.deleteOne({ _id: req.params.id }).lean();
+
+        if(req.params.id === res.locals.user.uid) {
+            return res.status(403).json({
+                ok : false,
+                message : "You can't delete yourself"
+            })
+        }
         return res.status(200).json({
             ok: true,
-            message: `Admin with id: ${req.params.id} deleted successfully`,
+            message: `${admin.username} deleted successfully`,
         });
-
     } catch (err: any) {
         return res.status(404).json({
             ok: false,
