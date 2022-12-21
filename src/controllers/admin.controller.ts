@@ -38,12 +38,11 @@ export async function showAllAdmin(req: Request, res: Response) {
         allAdmin?.map((admin: any) => {
             const { password, __v, ...formattedAdmin} = admin?._doc;
             admins.push(formattedAdmin as unknown as IAdmin);
-            console.log(admin)
         })
 
         return res.status(200).json({
             ok: true,
-            message: "Admin added successfully",
+            message: "Admins fetched successfully",
             data: admins,
         });
     } catch (err: any) {
