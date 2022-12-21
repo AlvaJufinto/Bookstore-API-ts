@@ -6,7 +6,7 @@ export async function addAdmin(req: Request, res: Response) {
     try {
         const { username, fullname, password, description, role } = req.body;
 
-        const user: any = await Admin.create({
+        const admin: any = await Admin.create({
             username,
             fullname,
             password,
@@ -14,7 +14,7 @@ export async function addAdmin(req: Request, res: Response) {
             role,
         });
 
-        const { password: returnedPassword, __v, ...rest } = user?._doc;
+        const { password: returnedPassword, __v, ...rest } = admin?._doc;
 
         return res.status(200).json({
             ok: true,
@@ -24,11 +24,10 @@ export async function addAdmin(req: Request, res: Response) {
     } catch (err: any) {
         return res.status(400).json({
             ok: false,
-            message: err.message,
+            message: "Sorry, We can't add admin",
         })
     }
 } 
-
 
 export async function showAllAdmin(req: Request, res: Response) {
     try {
@@ -48,9 +47,27 @@ export async function showAllAdmin(req: Request, res: Response) {
     } catch (err: any) {
         return res.status(400).json({
             ok: false,
-            message: err.message,
+            message: "Sorry, We can't fetch admins for now",
         })
     }
 } 
 
+export async function showAdmin(req: Request, res: Response) {
+    try {
+        const admin: any = await Admin.findOne({ _id: req.params.id }).lean();
 
+        const { password: returnedPassword, __v, ...rest } = admin;
+
+        return res.status(200).json({
+            ok: true,
+            message: "Admin fetched successfully",
+            data: { ...rest },
+        });
+
+    } catch (err: any) {
+        return res.status(400).json({
+            ok: false,
+            message: "Sorry, There's no admin with that id",
+        })
+    }
+} 
