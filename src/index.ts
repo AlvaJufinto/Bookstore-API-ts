@@ -28,6 +28,14 @@ app.use('/api/', healthRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/admin', adminRoute);
 
+app.use((req, res) => {
+    // Invalid request
+    res.status(404).json({
+        ok: false,
+        message: "Sorry, We can't find that route",
+    })
+});    
+
 app.listen(port, async () => {
     console.log(`App is running at http://localhost:${port}`);
 

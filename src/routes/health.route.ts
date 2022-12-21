@@ -3,6 +3,11 @@ import { Router } from 'express';
 
 const healthRoute = Router();
 
-healthRoute.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200))
+healthRoute.get('', (req: Request, res: Response) => {
+    return res.status(200).json({
+        ok: true,
+        message: "Im good brotha",
+    })
+})
 
 export default healthRoute;
