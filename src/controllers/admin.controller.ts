@@ -24,7 +24,7 @@ export async function addAdmin(req: Request, res: Response) {
     } catch (err: any) {
         return res.status(400).json({
             ok: false,
-            message: "Sorry, We can't add admin",
+            message: err.message,
         })
     }
 } 
@@ -65,9 +65,26 @@ export async function showAdmin(req: Request, res: Response) {
         });
 
     } catch (err: any) {
-        return res.status(400).json({
+        return res.status(404).json({
             ok: false,
-            message: "Sorry, There's no admin with that id",
+            message: "Sorry, there's no admin with that id",
+        })
+    }
+} 
+
+export async function deleteAdmin(req: Request, res: Response) {
+    try {
+        const admin: any = await Admin.deleteOne({ _id: req.params.id }).lean();
+        
+        return res.status(200).json({
+            ok: true,
+            message: `Admin with id: ${req.params.id} deleted successfully`,
+        });
+
+    } catch (err: any) {
+        return res.status(404).json({
+            ok: false,
+            message: "Sorry, there's no admin with that id",
         })
     }
 } 

@@ -28,7 +28,7 @@ export async function authenticationAdmin(req: Request, res: Response, next: Nex
     let admin;
 
     admin = await Admin.findOne({ 
-        id: adminId as string    
+        _id: adminId as string    
     });
 
     if(admin?.role !== 'admin') {
