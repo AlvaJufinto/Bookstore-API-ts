@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import AdminModel from "./../models/Admin.model";
+import Admin from "./../models/Admin.model";
 import { signJwt } from "./../utils/jwt.util";
 
 export async function authLogin(req: Request, res: Response) {
@@ -9,7 +9,7 @@ export async function authLogin(req: Request, res: Response) {
 
     let admin;
 
-    admin = await AdminModel.findOne({ 
+    admin = await Admin.findOne({ 
         username: username as string    
     });
 
@@ -31,9 +31,9 @@ export async function authLogin(req: Request, res: Response) {
     })
 } 
 
-export async function getAuthData(req: Request, res: Response) {
+export async function authData(req: Request, res: Response) {
     const adminId: string = res.locals.user.uid;
-    const admin = await AdminModel.findOne({
+    const admin = await Admin.findOne({
         id: adminId
     });
 

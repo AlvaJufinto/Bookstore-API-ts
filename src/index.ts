@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 
 dotenv.config();
 
-import connect from './utils/connect';
+import connect from './utils/connect.util';
 
 import healthRoute from './routes/health.route';
 import authRoute from './routes/auth.router';

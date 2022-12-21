@@ -35,5 +35,5 @@ const OrderItemSchema = new Schema<IOrderItem>({
     },
 })
 
-const OrderItemModel = mongoose.model<IOrderItem>("OrderItem", OrderItemSchema);
-export default OrderItemModel;
+const OrderItem = mongoose.model<IOrderItem>("OrderItem", OrderItemSchema);
+export default OrderItem;

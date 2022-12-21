@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import AdminModel from "../models/Admin.model";
+import Admin from "../models/Admin.model";
 
 export async function addAdmin(req: Request, res: Response) {
     try {
         const { username, fullname, password, description, role } = req.body;
 
-        const user = await AdminModel.create({
+        const user = await Admin.create({
             username,
             fullname,
             password,
@@ -30,8 +30,17 @@ export async function addAdmin(req: Request, res: Response) {
             ok: false,
             message: err.message,
         })
+    }
+} 
+
+
+export async function showAllAdmin(req: Request, res: Response) {
+    try {
+        const allAdmin = await Admin.find({});
+        console.log(allAdmin);
+    } catch (err) {
         
     }
-
 } 
+
 

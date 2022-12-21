@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import AdminModel from "../models/Admin.model";
+import Admin from "../models/Admin.model";
 import { verifyJwt } from "../utils/jwt.util";
 
 export async function authentication(req: Request, res: Response, next: NextFunction) {
@@ -27,7 +27,7 @@ export async function authenticationAdmin(req: Request, res: Response, next: Nex
     const adminId = res.locals.user.uid;
     let admin;
 
-    admin = await AdminModel.findOne({ 
+    admin = await Admin.findOne({ 
         id: adminId as string    
     });
 

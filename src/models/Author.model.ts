@@ -26,5 +26,5 @@ const AuthorSchema = new Schema<IAuthor>({
     }
 });
 
-const AuthorModel = mongoose.model<IAuthor>("Author", AuthorSchema);
-export default AuthorModel;
+const Author = mongoose.model<IAuthor>("Author", AuthorSchema);
+export default Author;
