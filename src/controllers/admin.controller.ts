@@ -112,7 +112,7 @@ export async function editAdmin(req: Request, res: Response) {
     } catch (err) {
         return res.status(404).json({
             ok: false,
-            message: "Sorry, there's we can't edit that admin",
+            message: "Sorry, we can't edit that admin",
         })
     }
 } 

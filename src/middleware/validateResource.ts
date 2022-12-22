@@ -24,15 +24,3 @@ export function validateAddAdmin(req: Request, res: Response, next: NextFunction
     }
     next();
 }
-
-export function strictBelongsTo(req: Request, res: Response, next: NextFunction) {
-    const { belongsTo } = req.body;
-
-    if(belongsTo){
-        return res.status(401).json({
-            ok : false,
-            message: "belongsTo detected"
-        })
-    }
-    return next();
-}

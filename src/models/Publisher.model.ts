@@ -1,15 +1,21 @@
 import mongoose, { Schema, model } from 'mongoose';
 
 interface IPublisher {
-    belongsto?: mongoose.Types.ObjectId;
+    books?: mongoose.Types.ObjectId;
+    name: string;
     country: string;
 }
 
 const PublisherSchema = new Schema<IPublisher>({
-    belongsto: {
-        type: mongoose.Types.ObjectId,
-        required: [true, "Field needs to be filled"],
-        ref: 'book'
+    books: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref: 'Book'
+        }
+    ],
+    name: {
+        type: String,
+        required: [true, "Name needs to be filled"]
     },
     country: {
         type: String,

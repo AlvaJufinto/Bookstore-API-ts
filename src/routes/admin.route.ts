@@ -9,9 +9,9 @@ const adminRoute = Router();
 
 adminRoute.get('/show', authentication, authenticationAdmin, showAllAdmin);
 adminRoute.get('/show/:id', authentication, authenticationAdmin, showAdmin);
-adminRoute.post('/add-admin', authentication, authenticationAdmin, validateAddAdmin, addAdmin);
-adminRoute.delete('/delete-admin/:id', authentication, authenticationAdmin, deleteAdmin);
-adminRoute.put('/edit-admin/:id', authentication, authenticationAdmin, editAdmin);
+adminRoute.post('/add', authentication, authenticationAdmin, validateAddAdmin, addAdmin);
+adminRoute.delete('/delete/:id', authentication, authenticationAdmin, deleteAdmin);
+adminRoute.put('/edit/:id', authentication, authenticationAdmin, editAdmin);
 
 
 export default adminRoute;

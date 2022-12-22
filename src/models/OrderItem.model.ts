@@ -11,15 +11,13 @@ interface IOrderItem {
 const OrderItemSchema = new Schema<IOrderItem>({
     books: [
         {
-            type: mongoose.Types.ObjectId,
-            required : [true, "Field needs to be filled"],
-            ref : "book"
+            type : mongoose.Types.ObjectId,
+            ref : "Book"
         }
     ],
     customer: {
         type: mongoose.Types.ObjectId,
-        required : [true, "Field needs to be filled"],
-        ref : "customer"
+        ref: "Customer"
     },
     country: {
         type: String,

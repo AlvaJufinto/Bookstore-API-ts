@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
 interface ICustomer {
-    belongsto?: mongoose.Types.ObjectId;
+    orders?: mongoose.Types.ObjectId;
     firstName: string;
     lastName?: string;
     address: string;
@@ -11,6 +11,12 @@ interface ICustomer {
 }
 
 const CustomerSchema = new Schema<ICustomer>({
+    orders: [
+        {
+            type : mongoose.Types.ObjectId,
+            ref : "Order",
+        }  
+    ],
     firstName: {
         type: String,
         required: true,

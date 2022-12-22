@@ -3,32 +3,31 @@ import mongoose, { Schema, model } from 'mongoose';
 interface IBook {
     author?: mongoose.Types.ObjectId;
     publisher?: mongoose.Types.ObjectId;
-    title?: string;
+    title: string;
     ISBN: string;
     genre: string[];
     publicationDate: Date;
     price: number;
-    profilePict: string;
-    condition: string;
 }
 
 const BookSchema = new Schema<IBook>({
     author: {       
         type: mongoose.Types.ObjectId,
-        ref: "post",
+        required : [true, "Title needs to be filled"],
+        ref: "Author",
     },
     publisher: {
         type: mongoose.Types.ObjectId,
-        ref: "publisher",
+        ref: "Publisher",
     },
     title: {
         type : String,
         required : [true, "Title needs to be filled"],
-        unique : [true, "Title must unique"],
+        unique : true,
     },
     ISBN : {
         type : String,
-        required : [true,"ISBN needs to be filled"],
+        required : [true, "ISBN needs to be filled"],
     },
     genre : [
         {
@@ -44,14 +43,6 @@ const BookSchema = new Schema<IBook>({
         type: Number,
         required : [true, "Price needs to be filled"],
     },
-    profilePict : {
-        type: String,
-    },
-    condition: {
-        type: String,
-        enum: ["good", "bad"],
-        default: "good" 
-    }
 });
 
 const Book = mongoose.model<IBook>("Book", BookSchema);

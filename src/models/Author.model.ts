@@ -1,18 +1,19 @@
 import mongoose, { Schema, model } from 'mongoose';
 
 interface IAuthor {
-    belongsto?: mongoose.Types.ObjectId;
+    books?: mongoose.Types.ObjectId;
     firstName: string;
     lastName?: string;
     country: string;
 } 
 
 const AuthorSchema = new Schema<IAuthor>({
-    belongsto : {
-        type : mongoose.Types.ObjectId,
-        required : [true, "Field needs to be filled"],
-        ref : "book"
-    },
+    books: [
+        {
+            type: mongoose.Types.ObjectId,
+            ref : "Book"
+        },
+    ],
     firstName: {
         type: String,
         required: [true, "Firstname needs to be filled"],
