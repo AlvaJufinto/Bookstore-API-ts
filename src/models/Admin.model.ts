@@ -20,9 +20,11 @@ const AdminSchema = new Schema<IAdmin>({
     },
     fullname: {
         type: String,
+        default: "",
     },
     description: {
         type: String,
+        default: "",
     },
     role: {
         type: String,
