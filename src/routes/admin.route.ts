@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
 import { authentication, authenticationAdmin } from '../middleware/authMiddleware';
-import { validateAddAdmin } from 'src/middleware/validateResource';
+import { validateAddAdmin } from '../middleware/validateResource';
 
 import { addAdmin, showAllAdmin, showAdmin, deleteAdmin, editAdmin } from '../controllers/admin.controller';
 

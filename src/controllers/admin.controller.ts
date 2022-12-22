@@ -13,7 +13,7 @@ export async function addAdmin(req: Request, res: Response) {
             description,
             role,
         });
-        const { password: returnedPassword, __v, ...rest } = admin?._doc;
+        const { password: returnedPassword, ...rest } = admin?._doc;
     
         return res.status(200).json({
             ok: true,
@@ -34,7 +34,7 @@ export async function showAllAdmin(req: Request, res: Response) {
         const admins: IAdmin[] = [];
 
         allAdmin?.map((admin: any) => {
-            const { password, __v, ...formattedAdmin} = admin?._doc;
+            const { password, ...formattedAdmin} = admin?._doc;
             admins.push(formattedAdmin as unknown as IAdmin);
         })
 
@@ -55,7 +55,7 @@ export async function showAdmin(req: Request, res: Response) {
     try {
         const admin: any = await Admin.findOne({ _id: req.params.id }).lean();
 
-        const { password: returnedPassword, __v, ...rest } = admin;
+        const { password: returnedPassword, ...rest } = admin;
 
         return res.status(200).json({
             ok: true,
@@ -96,14 +96,18 @@ export async function editAdmin(req: Request, res: Response) {
     try {
         const { username, fullname, description, role } = req.body;
         
-        const admin: any = await Admin.findOneAndUpdate({ _id: req.params.id }, { 
-            $set: {     
-                username,
-                fullname,
-                description,
-                role,
-            }
-        }, { new: true });
+        const admin: any = await Admin.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { 
+                $set: {     
+                    username,
+                    fullname,
+                    description,
+                    role,
+                }
+            }, 
+            { new: true }
+        );
 
         return res.status(200).json({
             ok: true,

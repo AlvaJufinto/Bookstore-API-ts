@@ -10,6 +10,7 @@ import connect from './utils/connect.util';
 import healthRoute from './routes/health.route';
 import authRoute from './routes/auth.router';
 import adminRoute from './routes/admin.route';
+import bookRoute from './routes/book.route';
 
 const port = process.env.PORT || 5000;
 const app = express();
@@ -27,6 +28,8 @@ app.use(bodyParser.urlencoded({
 app.use('/api/', healthRoute);
 app.use('/api/auth', authRoute);
 app.use('/api/admin', adminRoute);
+app.use('/api/book', bookRoute);
+
 
 app.use((req, res) => {
     // Invalid request

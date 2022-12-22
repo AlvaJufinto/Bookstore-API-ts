@@ -1,7 +1,8 @@
 import { Request, Response } from "express";
-import bcrypt from "bcrypt";
 
 import Book from "./../models/Book.model";
+import Author from "../models/Author.model";
+import Publisher from "../models/Publisher.model";
 
 export async function addBook(req: Request, res: Response) {
     try {
@@ -15,13 +16,40 @@ export async function addBook(req: Request, res: Response) {
             genre,
             publicationDate,
             price
-        });
-        const { __v, ...rest } = book?._doc;
+        }); 
+
+        const bookAuthor: any = await Author.findOneAndUpdate(
+            { _id: author },
+            { 
+                $push: { 
+                    books: book._id 
+                } 
+            },
+            { new: true, useFindAndModify: false }
+        );
         
+        const publisherAuthor: any = await Publisher.findOneAndUpdate(
+            { _id: publisher },
+            { 
+                $push: { 
+                    books: book._id 
+                } 
+            },
+            { new: true, useFindAndModify: false }
+        );
+
+        const { author: authorBook, publisher: publisherBook, ...restBook } = book?._doc;
+        const { books: booksAuthor, ...restBookAuthor } = bookAuthor?._doc;
+        const { books: booksPublishers, ...restBooksPublishers } = publisherAuthor?._doc;
+
         return res.status(200).json({
             ok: true,
             message: "Book added successfully",
-            data: { ...rest }
+            data: { 
+                ...restBook,
+                author: restBookAuthor,
+                publisher: restBooksPublishers,
+            } 
         });
     } catch (err: any) {
         return res.status(400).json({

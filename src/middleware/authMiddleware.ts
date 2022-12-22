@@ -40,3 +40,19 @@ export async function authenticationAdmin(req: Request, res: Response, next: Nex
     next();
 } 
 
+export async function authenticationViewer(req: Request, res: Response, next: NextFunction) {
+    const adminId = res.locals.user.uid;
+    let admin;
+    
+    admin = await Admin.findOne({ 
+        _id: adminId as string    
+    });
+
+    if(admin?.role === 'viewer') {
+        return res.status(403).json({
+            ok: false,
+            message: "Access denied"
+        });
+    }
+    next();
+}
