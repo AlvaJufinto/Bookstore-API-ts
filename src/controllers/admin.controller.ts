@@ -6,27 +6,20 @@ export async function addAdmin(req: Request, res: Response) {
     try {
         const { username, fullname, password, description, role } = req.body;
 
-        if(username.includes(" ") === false) {
-            const admin: any = await Admin.create({
-                username,
-                fullname,
-                password,
-                description,
-                role,
-            });
-            const { password: returnedPassword, __v, ...rest } = admin?._doc;
+        const admin: any = await Admin.create({
+            username,
+            fullname,
+            password,
+            description,
+            role,
+        });
+        const { password: returnedPassword, __v, ...rest } = admin?._doc;
     
-            return res.status(200).json({
-                ok: true,
-                message: "Admin added successfully",
-                data: { ...rest }
-            });
-        }
-        
-        return res.status(400).json({
-            ok: false,
-            message: "Username can't contain spaces",
-        })
+        return res.status(200).json({
+            ok: true,
+            message: "Admin added successfully",
+            data: { ...rest }
+        });
     } catch (err: any) {
         return res.status(400).json({
             ok: false,

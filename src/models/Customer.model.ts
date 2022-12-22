@@ -11,11 +11,6 @@ interface ICustomer {
 }
 
 const CustomerSchema = new Schema<ICustomer>({
-    belongsto: {
-        type: mongoose.Types.ObjectId,
-        required: [true, "Field needs to be filled"],
-        ref: 'orderItem'
-    },
     firstName: {
         type: String,
         required: true,
