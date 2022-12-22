@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 
-import Book from "./../models/Book.model";
+import Book, { IBook } from "./../models/Book.model";
 import Author from "../models/Author.model";
 import Publisher from "../models/Publisher.model";
 
@@ -51,6 +51,51 @@ export async function addBook(req: Request, res: Response) {
                 publisher: restBooksPublishers,
             } 
         });
+    } catch (err: any) {
+        return res.status(400).json({
+            ok: false,
+            message: err.message,
+        })
+    }
+} 
+
+export async function showAllBook(req: Request, res: Response) {
+    try {
+        const books: IBook[] = await Book.find({})
+            .populate("author")
+            .populate("publisher");
+
+        return res.status(200).json({
+            ok: true,
+            message: "Books fetched successfully",
+            data: { 
+                ...books,                
+            } 
+        });
+
+    } catch (err: any) {
+        return res.status(400).json({
+            ok: false,
+            message: err.message,
+        })
+    }
+} 
+
+
+export async function showBook(req: Request, res: Response) {
+    try {
+        const book: any = await Book.findOne({ _id: req.params.id })
+            .populate("author")
+            .populate("publisher")
+
+        return res.status(200).json({
+            ok: true,
+            message: "Book fetched successfully",
+            data: { 
+                ...book?._doc,
+            } 
+        });
+
     } catch (err: any) {
         return res.status(400).json({
             ok: false,

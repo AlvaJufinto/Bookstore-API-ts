@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-interface IBook {
+export interface IBook {
     author?: mongoose.Types.ObjectId;
     publisher?: mongoose.Types.ObjectId;
     title: string;
