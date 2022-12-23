@@ -13,7 +13,8 @@ export async function addAdmin(req: Request, res: Response) {
             description,
             role,
         });
-        const { password: returnedPassword, ...rest } = admin?._doc;
+        
+        const { password: returnedPassword, ...rest } = admin.toObject();
     
         return res.status(200).json({
             ok: true,
@@ -30,18 +31,16 @@ export async function addAdmin(req: Request, res: Response) {
 
 export async function showAllAdmin(req: Request, res: Response) {
     try {
-        const allAdmin: IAdmin[] = await Admin.find({});
-        const admins: IAdmin[] = [];
-
-        allAdmin?.map((admin: any) => {
-            const { password, ...formattedAdmin} = admin?._doc;
-            admins.push(formattedAdmin as unknown as IAdmin);
+        const admins: IAdmin[] = await Admin.find().lean();
+        const formattedAdmins: IAdmin[] = admins?.map((admin: any) => {
+            const { password, ...formattedAdmin} = admin;
+            return formattedAdmin;
         })
 
         return res.status(200).json({
             ok: true,
             message: "Admins fetched successfully",
-            data: admins,
+            data: formattedAdmins,
         });
     } catch (err: any) {
         return res.status(400).json({
@@ -53,7 +52,7 @@ export async function showAllAdmin(req: Request, res: Response) {
 
 export async function showAdmin(req: Request, res: Response) {
     try {
-        const admin: any = await Admin.findOne({ _id: req.params.id }).lean();
+        const admin: any = await Admin.findOne({ _id: req.params.id });
 
         const { password: returnedPassword, ...rest } = admin;
 
@@ -83,6 +82,7 @@ export async function deleteAdmin(req: Request, res: Response) {
         return res.status(200).json({
             ok: true,
             message: `${admin.username} deleted successfully`,
+            data: { ...admin }
         });
     } catch (err: any) {
         return res.status(404).json({

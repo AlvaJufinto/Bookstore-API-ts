@@ -26,7 +26,7 @@ export async function addBook(req: Request, res: Response) {
                 } 
             },
             { new: true, useFindAndModify: false }
-        );
+        ).lean();
         
         const publisherAuthor: any = await Publisher.findOneAndUpdate(
             { _id: publisher },
@@ -36,11 +36,11 @@ export async function addBook(req: Request, res: Response) {
                 } 
             },
             { new: true, useFindAndModify: false }
-        );
+        ).lean();
 
-        const { author: authorBook, publisher: publisherBook, ...restBook } = book?._doc;
-        const { books: booksAuthor, ...restBookAuthor } = bookAuthor?._doc;
-        const { books: booksPublishers, ...restBooksPublishers } = publisherAuthor?._doc;
+        const { author: authorBook, publisher: publisherBook, ...restBook } = book.toObject();
+        const { books: booksAuthor, ...restBookAuthor } = bookAuthor;
+        const { books: booksPublishers, ...restBooksPublishers } = publisherAuthor;
 
         return res.status(200).json({
             ok: true,
@@ -87,12 +87,54 @@ export async function showBook(req: Request, res: Response) {
         const book: any = await Book.findOne({ _id: req.params.id })
             .populate("author")
             .populate("publisher")
+            .lean()
 
         return res.status(200).json({
             ok: true,
             message: "Book fetched successfully",
             data: { 
-                ...book?._doc,
+                ...book,
+            } 
+        });
+
+    } catch (err: any) {
+        return res.status(404).json({
+            ok: false,
+            message: "Sorry, there's no book with that id",
+        })
+    }
+} 
+
+export async function deleteBook(req: Request, res: Response) {
+    try {
+        const book: any = await Book.findOneAndDelete({ _id: req.params.id })
+            .populate("author")
+            .populate("publisher")
+
+
+        const bookAuthor: any = await Author.findOneAndUpdate(
+            { _id: book.author },
+            { 
+                $pull: { 
+                    books: book._id 
+                } 
+            },
+        );
+        
+        const publisherAuthor: any = await Publisher.findOneAndUpdate(
+            { _id: book.publisher },
+            { 
+                $pull: { 
+                    books: book._id 
+                } 
+            },
+        );
+
+        return res.status(200).json({
+            ok: true,
+            message: "Book deleted successfully",
+            data: { 
+                book, bookAuthor, publisherAuthor, 
             } 
         });
 
