@@ -4,14 +4,8 @@ import Admin, { IAdmin } from "../models/Admin.model";
 
 export async function addAdmin(req: Request, res: Response) {
     try {
-        const { username, fullname, password, description, role } = req.body;
-
         const admin: any = await Admin.create({
-            username,
-            fullname,
-            password,
-            description,
-            role,
+            ...req.body
         });
         
         const { password: returnedPassword, ...rest } = admin.toObject();
@@ -52,7 +46,7 @@ export async function showAllAdmin(req: Request, res: Response) {
 
 export async function showAdmin(req: Request, res: Response) {
     try {
-        const admin: any = await Admin.findOne({ _id: req.params.id });
+        const admin: IAdmin = await Admin.findOne({ _id: req.params.id }).lean();
 
         const { password: returnedPassword, ...rest } = admin;
 
@@ -71,7 +65,7 @@ export async function showAdmin(req: Request, res: Response) {
 
 export async function deleteAdmin(req: Request, res: Response) {
     try {
-        const admin: any = await Admin.findOneAndDelete({ _id: req.params.id }).lean();
+        const admin: IAdmin = await Admin.findOneAndDelete({ _id: req.params.id }).lean();
 
         if(req.params.id === res.locals.user.uid) {
             return res.status(403).json({
@@ -94,24 +88,20 @@ export async function deleteAdmin(req: Request, res: Response) {
 
 export async function editAdmin(req: Request, res: Response) {
     try {
-        const { username, fullname, description, role } = req.body;
-        
-        const admin: any = await Admin.findOneAndUpdate(
+        const admin: IAdmin = await Admin.findOneAndUpdate(
             { _id: req.params.id }, 
             { 
                 $set: {     
-                    username,
-                    fullname,
-                    description,
-                    role,
+                    ...req.body
                 }
             }, 
             { new: true }
-        );
+        ).lean();
 
         return res.status(200).json({
             ok: true,
-            message: admin,
+            message: `${admin.username} edited successfully`,
+            data: { ...admin }
         });
     } catch (err) {
         return res.status(404).json({

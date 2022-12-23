@@ -6,16 +6,10 @@ import Publisher from "../models/Publisher.model";
 
 export async function addBook(req: Request, res: Response) {
     try {
-        const { author, publisher, title, ISBN, genre, price, publicationDate } = req.body;
+        const { author, publisher } = req.body;
 
         const book: any = await Book.create({
-            author,
-            publisher,
-            title,
-            ISBN,
-            genre,
-            publicationDate,
-            price
+            ...req.body
         }); 
 
         const bookAuthor: any = await Author.findOneAndUpdate(
@@ -81,7 +75,6 @@ export async function showAllBook(req: Request, res: Response) {
     }
 } 
 
-
 export async function showBook(req: Request, res: Response) {
     try {
         const book: any = await Book.findOne({ _id: req.params.id })
@@ -110,9 +103,9 @@ export async function deleteBook(req: Request, res: Response) {
         const book: any = await Book.findOneAndDelete({ _id: req.params.id })
             .populate("author")
             .populate("publisher")
+            .lean();
 
-
-        const bookAuthor: any = await Author.findOneAndUpdate(
+        await Author.findOneAndUpdate(
             { _id: book.author },
             { 
                 $pull: { 
@@ -121,7 +114,7 @@ export async function deleteBook(req: Request, res: Response) {
             },
         );
         
-        const publisherAuthor: any = await Publisher.findOneAndUpdate(
+        await Publisher.findOneAndUpdate(
             { _id: book.publisher },
             { 
                 $pull: { 
@@ -132,9 +125,9 @@ export async function deleteBook(req: Request, res: Response) {
 
         return res.status(200).json({
             ok: true,
-            message: "Book deleted successfully",
+            message: `"${book?.title}" deleted successfully`,
             data: { 
-                book, bookAuthor, publisherAuthor, 
+                ...book,  
             } 
         });
 
@@ -145,3 +138,78 @@ export async function deleteBook(req: Request, res: Response) {
         })
     }
 } 
+
+export async function editBook(req: Request, res: Response) {
+    try {
+        const { author, publisher } = req.body;        
+        const oldBook = await Book.findOne({ _id: req.params.id });
+
+        if(author !== oldBook?.author?._id?.toString()) {
+            await Author.findOneAndUpdate(
+                { _id: author },
+                { 
+                    $push: { 
+                        books: req.params.id
+                    } 
+                },
+            );
+
+            await Author.findOneAndUpdate(
+                { _id: oldBook?.author?._id },
+                { 
+                    $pull: { 
+                        books: req.params.id
+                    } 
+                },
+            );
+        }
+
+        if(publisher !== oldBook?.publisher?._id?.toString()) {
+            await Publisher.findOneAndUpdate(
+                { _id: publisher },
+                { 
+                    $push: { 
+                        books: req.params.id
+                    } 
+                },
+            );
+
+            await Publisher.findOneAndUpdate(
+                { _id: oldBook?.publisher?._id },
+                { 
+                    $pull: { 
+                        books: req.params.id
+                    } 
+                },
+            );
+        }
+
+        const book: any = await Book.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { 
+                $set: req.body 
+            },
+            { new: true }
+
+        )
+        .populate("author")
+        .populate("publisher")
+        .lean(); 
+
+
+        return res.status(200).json({
+            ok: true,
+            message: `${book?.title} edited successfully`,
+            data: { 
+                ...book
+            } 
+        });
+
+    } catch (err: any) {
+        return res.status(400).json({
+            ok: false,
+            message: err.message,
+        })
+    }
+} 
+

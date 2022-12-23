@@ -1,4 +1,8 @@
+import { Request, Response } from 'express';
 import mongoose, { Schema, model } from 'mongoose';
+
+import Author from "../models/Author.model";
+import Publisher from "../models/Publisher.model";
 
 export interface IBook {
     author?: mongoose.Types.ObjectId;
@@ -44,6 +48,7 @@ const BookSchema = new Schema<IBook>({
         required : [true, "Price needs to be filled"],
     },
 });
+
 
 const Book = mongoose.model<IBook>("Book", BookSchema);
 export default Book;

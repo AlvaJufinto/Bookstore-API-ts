@@ -1,8 +1,5 @@
 import mongoose, { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
 
 export interface IAdmin {
     username: string;
