@@ -110,6 +110,14 @@ export async function deleteOrder(req: Request, res: Response) {
             .populate('books')
             .lean();
         
+        await Customer.findOneAndUpdate(
+            { _id: order?.customer },
+            { 
+                $pull: { 
+                    orders: order?._id 
+                } 
+            },
+        );
         return res.status(200).json({
             ok: true,
             message: `${order?.customer?.firstName} ${order?.customer?.lastName}'s order deleted successfully`,
