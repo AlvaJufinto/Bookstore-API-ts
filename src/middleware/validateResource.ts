@@ -24,3 +24,23 @@ export function validateAddAdmin(req: Request, res: Response, next: NextFunction
     }
     next();
 }
+
+export function validateQuery(req: Request, res: Response, next: NextFunction) {
+    const { withId } = req.query;
+
+    if(withId === undefined) {
+        return res.status(400).json({
+            ok: false,
+            message: "You have to add '?withId=' after route",
+        })
+    }
+
+    if(withId === "true" || withId === "false") {
+        return next();
+    }
+    
+    return res.status(400).json({
+        ok: false,
+        message: "'?withId=' value must be 'true' OR 'false'",
+    })
+}

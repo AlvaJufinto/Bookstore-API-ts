@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
 interface ICustomer {
-    orderItems?: mongoose.Types.ObjectId;
+    orders?: mongoose.Types.ObjectId;
     firstName: string;
     lastName?: string;
     address: string;
@@ -11,41 +11,42 @@ interface ICustomer {
 }
 
 const CustomerSchema = new Schema<ICustomer>({
-    orderItems: [
+    orders: [
         {
             type : mongoose.Types.ObjectId,
-            ref : "OrderItem",
+            ref : "Order",
         }  
     ],
     firstName: {
         type: String,
-        required: true,
+        required: [true, "First Name needs to be filled"],
     },
     lastName: {
         type: String,
-        required: true,
+        required: [true, "Last Name needs to be filled"],
+        unique: true,
     },
     address: {
         type: String,
-        required: true,
+        required: [true, "Address needs to be filled"],
     },
     postalCode: {
         type: String,
-        required: true,
+        required: [true, "Postal Code needs to be filled"],
     },
     country: {
         type: String,
-        required: true,
+        required: [true, "Country needs to be filled"],
     },
     province: {
         type: String,
-        required: true,
+        required: [true, "Province Code needs to be filled"],
     },
     phoneNumber: {
         type: String,
-        required: true,
+        required: [true, "Postal Code needs to be filled"],
     }
-})
+});
 
 const Customer = mongoose.model<ICustomer>("Customer", CustomerSchema);
 export default Customer;

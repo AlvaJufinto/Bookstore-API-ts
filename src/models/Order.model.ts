@@ -1,6 +1,6 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
 
-interface IOrderItem {
+export interface IOrder {
     books?: mongoose.Types.ObjectId[];
     customer?: mongoose.Types.ObjectId;
     country: string;
@@ -8,7 +8,7 @@ interface IOrderItem {
     shippingName: string;
 }
 
-const OrderItemSchema = new Schema<IOrderItem>({
+const OrderSchema = new Schema<IOrder>({
     books: [
         {
             type : mongoose.Types.ObjectId,
@@ -25,7 +25,7 @@ const OrderItemSchema = new Schema<IOrderItem>({
     },
     shippingName: {
         type: String,
-        required: [true, "Shipping needs to be filled"]
+        required: [true, "Shipping Name needs to be filled"]
     },
     total: {
         type: Number,
@@ -33,5 +33,5 @@ const OrderItemSchema = new Schema<IOrderItem>({
     },
 })
 
-const OrderItem = mongoose.model<IOrderItem>("OrderItem", OrderItemSchema);
-export default OrderItem;
+const Order = mongoose.model<IOrder>("Order", OrderSchema);
+export default Order;
