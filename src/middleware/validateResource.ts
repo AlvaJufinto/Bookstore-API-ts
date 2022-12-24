@@ -44,3 +44,16 @@ export function validateQuery(req: Request, res: Response, next: NextFunction) {
         message: "'?withId=' value must be 'true' OR 'false'",
     })
 }
+
+export function validateEditOrder(req: Request, res: Response, next: NextFunction) {
+    const { books, customer, total } = req.body;
+
+    if(books || customer || total) {
+        return res.status(400).json({
+            ok: false,
+            message: "You can't edit books, customer, and total",
+        })
+    }
+    
+    next()
+}

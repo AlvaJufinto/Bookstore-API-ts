@@ -118,6 +118,7 @@ export async function deleteOrder(req: Request, res: Response) {
                 } 
             },
         );
+        
         return res.status(200).json({
             ok: true,
             message: `${order?.customer?.firstName} ${order?.customer?.lastName}'s order deleted successfully`,
@@ -133,9 +134,23 @@ export async function deleteOrder(req: Request, res: Response) {
 
 export async function editOrder(req: Request, res: Response) {
     try {
-       
-
-    
+        const { books, customer, total, ...restOrder } = req.body
+        
+        const order: IOrder = await Order.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { 
+                $set: {     
+                    ...restOrder, 
+                }
+            }, 
+            { new: true }
+        ).lean();
+        
+        return res.status(200).json({
+            ok: true,
+            message: `Order edited successfully`,
+            data: order,
+        });
     
     } catch (err: any) {
         return res.status(400).json({

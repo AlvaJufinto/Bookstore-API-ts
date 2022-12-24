@@ -98,8 +98,6 @@ export async function editAdmin(req: Request, res: Response) {
             { new: true }
         ).lean();
         
-        
-
         return res.status(200).json({
             ok: true,
             message: `${admin.username} edited successfully`,
