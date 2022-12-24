@@ -1,0 +1,645 @@
+{
+	"info": {
+		"_postman_id": "a0b8ac36-4c69-49ea-8a8b-04d0107a5690",
+		"name": "bookstore",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17448544"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"AlvaJufinto\",\r\n    \"password\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/auth/login",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Auth Data",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{endpoint}}/auth/get-data",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"auth",
+								"get-data"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Add Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"TomShelby\",\r\n    \"fullname\": \"Thomas Shelby\",\r\n    \"description\": \"This guy is an ice cold\",\r\n    \"password\": \"123\",\r\n    \"role\": \"editor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/admin/add",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"admin",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Admins",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/admin/show",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"admin",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Specific Admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/admin/show/63a5a29e58595f8740e7d8e9",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"admin",
+								"show",
+								"63a5a29e58595f8740e7d8e9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/admin/delete/63a5a22d32497fc5a73449fd",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"admin",
+								"delete",
+								"63a5a22d32497fc5a73449fd"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fullname\": \"TomFookinShelby\",\r\n    \"username\": \"Tom.Shelby\"\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/admin/edit/63a5a29e58595f8740e7d8e9",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"admin",
+								"edit",
+								"63a5a29e58595f8740e7d8e9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Book",
+			"item": [
+				{
+					"name": "Add Book",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"author\": \"63a5ac3792bf4ead7168eec9\",\r\n    \"publisher\": \"63a5ac6192bf4ead7168eecb\",\r\n    \"title\": \"How to be a good mafia in Birmingham\",\r\n    \"ISBN\": \"0286083922829\",\r\n    \"genre\": [\"Crime\", \"Politic\"],\r\n    \"publicationDate\": \"2007-07-17\",\r\n    \"price\": \"50\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/book/add",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"book",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Books",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/book/show",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"book",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Specific Book",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/book/show/63a5a01d03b5858d10387ces4",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"book",
+								"show",
+								"63a5a01d03b5858d10387ces4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Book",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/book/delete/63a5b22d91b1e1b0b3c1a0ca",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"book",
+								"delete",
+								"63a5b22d91b1e1b0b3c1a0ca"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Book",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"author\": \"63a5960992bf4ead7168eec6\",\r\n    \"publisher\": \"63a5965592bf4ead7168eec7z\",\r\n    \"title\": \"1002 Way to Become Mafia in Birmingham\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/book/edit/63a5bbb1cb38c5cafd5a9a83",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"book",
+								"edit",
+								"63a5bbb1cb38c5cafd5a9a83"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Order",
+			"item": [
+				{
+					"name": "Add Order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"books\": [\"63a5bbb1cb38c5cafd5a9a83\"],\r\n    \"customer\": \"63a6855068b1fc80f43d222e\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/order/add?withId=true",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"order",
+								"add"
+							],
+							"query": [
+								{
+									"key": "withId",
+									"value": "true"
+								},
+								{
+									"key": "withId",
+									"value": "False",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/order/show",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"order",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Specific Order",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/order/show/63a43d3cbd2c9689964a42d6",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"order",
+								"show",
+								"63a43d3cbd2c9689964a42d6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Order",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/order/delete/63a7331bab52a20794bde531",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"order",
+								"delete",
+								"63a7331bab52a20794bde531"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Order",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"country\": \"UK\",\r\n    \"shippingName\": \"UK Express\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/order/edit/63a7354dc69823198ec4c6a4",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"order",
+								"edit",
+								"63a7354dc69823198ec4c6a4"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8000/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "endpoint",
+			"value": "http://localhost:8800/api"
+		}
+	]
+}

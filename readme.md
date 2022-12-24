@@ -37,7 +37,7 @@ To run this repo  **in production mode** :
 JSON file to test this API on **Postman** :
 
 `
-postman_collection.json
+bookstore.postman_collection.json
 `
 
 
