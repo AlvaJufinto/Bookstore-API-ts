@@ -11,7 +11,6 @@ export async function addOrder(req: Request, res: Response) {
         let formattedBooks: IBook[] = [];
         let formattedOrders: IOrder[] = [];
 
-
         if(withId) {
             const order: IOrder = await Order.create({
                 customer,

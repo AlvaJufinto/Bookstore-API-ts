@@ -37,7 +37,7 @@ const AdminSchema = new Schema<IAdmin>({
 });
 
 
-AdminSchema.pre("save", async function(next: NextFunction) {
+AdminSchema.pre("save", async function(next: NextFunction | any) {
     let admin = this;
     
     if(!admin?.isModified('password')) {
