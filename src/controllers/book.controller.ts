@@ -142,7 +142,7 @@ export async function deleteBook(req: Request, res: Response) {
 export async function editBook(req: Request, res: Response) {
     try {
         const { author, publisher } = req.body;        
-        const oldBook: IBook = await Book.findOne({ _id: req.params.id }) as IBook;     
+        const oldBook: IBook = await Book.findOne({ _id: req.params.id }) as IBook;   
 
         if(author !== oldBook?.author?._id?.toString()) {
             await Author.findOneAndUpdate(

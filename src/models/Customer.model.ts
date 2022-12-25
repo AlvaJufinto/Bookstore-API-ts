@@ -3,6 +3,7 @@ import mongoose, { Schema, model, mongo } from 'mongoose';
 import { IOrder } from './Order.model';
 
 export interface ICustomer {
+    _id?: string | number;
     orders?: IOrder[];
     firstName: string;
     lastName?: string;

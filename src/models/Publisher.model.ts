@@ -3,6 +3,7 @@ import mongoose, { Schema, model } from 'mongoose';
 import { IBook } from './Book.model';
 
 export interface IPublisher {
+    _id?: string | number;
     books?: IBook;
     name: string;
     country: string;

@@ -3,6 +3,7 @@ import mongoose, { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 export interface IAdmin {
+    _id?: string | number;
     username: string;
     fullname: string;
     password: string;
