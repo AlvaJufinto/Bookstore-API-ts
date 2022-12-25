@@ -1,6 +1,6 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-interface IPublisher {
+export interface IPublisher {
     books?: mongoose.Types.ObjectId;
     name: string;
     country: string;

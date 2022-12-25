@@ -1,3 +1,4 @@
+import { NextFunction } from 'express';
 import mongoose, { Schema, model } from 'mongoose';
 import bcrypt from 'bcrypt';
 
@@ -7,6 +8,7 @@ export interface IAdmin {
     password: string;
     description: string;
     role: string;
+    toObject(): IAdmin;
 } 
 
 const AdminSchema = new Schema<IAdmin>({
@@ -35,7 +37,7 @@ const AdminSchema = new Schema<IAdmin>({
 });
 
 
-AdminSchema.pre("save", async function(next: any) {
+AdminSchema.pre("save", async function(next: NextFunction) {
     let admin = this;
     
     if(!admin?.isModified('password')) {

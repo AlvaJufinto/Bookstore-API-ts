@@ -8,32 +8,36 @@ export async function addOrder(req: Request, res: Response) {
     try {
         let withId: boolean = req.query.withId === 'true' ? true : false;
         const { customer, books, ...restBody } = req.body;
-        let formattedBooks: any = [];
-        
+        let formattedBooks: IBook[] = [];
+        let formattedOrders: IOrder[] = [];
+
+
         if(withId) {
-            const order: any = await Order.create({
+            const order: IOrder = await Order.create({
                 customer,
-                books,
+                books: {
+                    _id: req.params.id,
+                },
                 ...restBody
             }); 
 
             books?.map(async (book: IBook) => {
-                formattedBooks.push(await Book.findOne({ _id: book })?.lean());
+                formattedBooks?.push(await Book.findOne({ _id: book })?.lean());
             });
 
             console.log(await formattedBooks)
 
-            const orderCustomer: any = await Customer.findOneAndUpdate(
+            const orderCustomer: IOrder = await Customer.findOneAndUpdate(
                 { _id: customer },
                 { 
                     $push: { 
-                        orders: order._id 
+                        orders: order?._id 
                     } 
                 },
                 { new: true, useFindAndModify: false }
             ).lean();
                 
-            const { customer: customerOrder, books: booksOrder, ...restOrder } = order.toObject();
+            const { customer: customerOrder, books: booksOrder, ...restOrder } = order;
             
             return res.status(200).json({
                 ok: true,
@@ -105,7 +109,7 @@ export async function showOrder(req: Request, res: Response) {
 
 export async function deleteOrder(req: Request, res: Response) {
     try {
-        const order: any = await Order.findOneAndDelete({ _id: req.params.id })
+        const order: IOrder = await Order.findOneAndDelete({ _id: req.params.id })
             .populate('customer')
             .populate('books')
             .lean();

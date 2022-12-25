@@ -5,6 +5,7 @@ import Author from "../models/Author.model";
 import Publisher from "../models/Publisher.model";
 
 export interface IBook {
+    _id?: string | number;
     author?: mongoose.Types.ObjectId;
     publisher?: mongoose.Types.ObjectId;
     title: string;
@@ -12,6 +13,7 @@ export interface IBook {
     genre: string[];
     publicationDate: Date;
     price: number;
+    toObject(): IBook;
 }
 
 const BookSchema = new Schema<IBook>({

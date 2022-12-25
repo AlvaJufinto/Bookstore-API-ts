@@ -1,18 +1,18 @@
 import { Request, Response } from "express";
 
 import Book, { IBook } from "./../models/Book.model";
-import Author from "../models/Author.model";
-import Publisher from "../models/Publisher.model";
+import Author, { IAuthor } from "../models/Author.model";
+import Publisher, { IPublisher } from "../models/Publisher.model";
 
 export async function addBook(req: Request, res: Response) {
     try {
         const { author, publisher } = req.body;
 
-        const book: any = await Book.create({
+        const book: IBook = await Book.create({
             ...req.body
         }); 
 
-        const bookAuthor: any = await Author.findOneAndUpdate(
+        const bookAuthor: IAuthor = await Author.findOneAndUpdate(
             { _id: author },
             { 
                 $push: { 
@@ -22,7 +22,7 @@ export async function addBook(req: Request, res: Response) {
             { new: true, useFindAndModify: false }
         ).lean();
         
-        const publisherAuthor: any = await Publisher.findOneAndUpdate(
+        const publisherAuthor: IPublisher = await Publisher.findOneAndUpdate(
             { _id: publisher },
             { 
                 $push: { 
@@ -77,7 +77,7 @@ export async function showAllBook(req: Request, res: Response) {
 
 export async function showBook(req: Request, res: Response) {
     try {
-        const book: any = await Book.findOne({ _id: req.params.id })
+        const book: IBook = await Book.findOne({ _id: req.params.id })
             .populate("author")
             .populate("publisher")
             .lean()
@@ -100,7 +100,7 @@ export async function showBook(req: Request, res: Response) {
 
 export async function deleteBook(req: Request, res: Response) {
     try {
-        const book: any = await Book.findOneAndDelete({ _id: req.params.id })
+        const book: IBook = await Book.findOneAndDelete({ _id: req.params.id })
             .populate("author")
             .populate("publisher")
             .lean();
@@ -142,7 +142,7 @@ export async function deleteBook(req: Request, res: Response) {
 export async function editBook(req: Request, res: Response) {
     try {
         const { author, publisher } = req.body;        
-        const oldBook = await Book.findOne({ _id: req.params.id });
+        const oldBook: IBook = await Book.findOne({ _id: req.params.id }) as IBook;     
 
         if(author !== oldBook?.author?._id?.toString()) {
             await Author.findOneAndUpdate(
@@ -184,7 +184,7 @@ export async function editBook(req: Request, res: Response) {
             );
         }
 
-        const book: any = await Book.findOneAndUpdate(
+        const book: IBook = await Book.findOneAndUpdate(
             { _id: req.params.id }, 
             { 
                 $set: req.body 

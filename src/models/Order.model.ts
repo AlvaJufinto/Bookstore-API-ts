@@ -1,11 +1,14 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
+import { ICustomer } from './Customer.model';
 
 export interface IOrder {
+    _id?: string | number;
     books?: mongoose.Types.ObjectId[];
-    customer?: mongoose.Types.ObjectId;
+    customer?: ICustomer;
     country: string;
     total: number;
     shippingName: string;
+    toObject(): IOrder;
 }
 
 const OrderSchema = new Schema<IOrder>({

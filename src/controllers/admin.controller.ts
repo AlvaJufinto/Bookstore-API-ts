@@ -4,7 +4,7 @@ import Admin, { IAdmin } from "../models/Admin.model";
 
 export async function addAdmin(req: Request, res: Response) {
     try {
-        const admin: any = await Admin.create({
+        const admin: IAdmin = await Admin.create({
             ...req.body
         });
         
@@ -26,9 +26,9 @@ export async function addAdmin(req: Request, res: Response) {
 export async function showAllAdmin(req: Request, res: Response) {
     try {
         const admins: IAdmin[] = await Admin.find().lean();
-        const formattedAdmins: IAdmin[] = admins?.map((admin: any) => {
+        const formattedAdmins: IAdmin[] = admins?.map((admin: IAdmin) => {
             const { password, ...formattedAdmin} = admin;
-            return formattedAdmin;
+            return formattedAdmin as IAdmin;
         })
 
         return res.status(200).json({

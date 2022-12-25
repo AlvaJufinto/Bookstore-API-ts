@@ -1,5 +1,6 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
-interface ICustomer {
+
+export interface ICustomer {
     orders?: mongoose.Types.ObjectId;
     firstName: string;
     lastName?: string;
