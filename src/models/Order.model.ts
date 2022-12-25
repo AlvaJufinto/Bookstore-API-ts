@@ -1,9 +1,11 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
+
 import { ICustomer } from './Customer.model';
+import { IBook } from './Book.model';
 
 export interface IOrder {
     _id?: string | number;
-    books?: mongoose.Types.ObjectId[];
+    books?: IBook[];
     customer?: ICustomer;
     country: string;
     total: number;

@@ -1,7 +1,9 @@
 import mongoose, { Schema, model } from 'mongoose';
 
+import { IBook } from './Book.model';
+
 export interface IPublisher {
-    books?: mongoose.Types.ObjectId;
+    books?: IBook;
     name: string;
     country: string;
 }

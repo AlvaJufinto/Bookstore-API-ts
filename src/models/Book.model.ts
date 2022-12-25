@@ -1,13 +1,12 @@
-import { Request, Response } from 'express';
 import mongoose, { Schema, model } from 'mongoose';
 
-import Author from "../models/Author.model";
-import Publisher from "../models/Publisher.model";
+import { IAuthor } from "../models/Author.model";
+import { IPublisher } from "../models/Publisher.model";
 
 export interface IBook {
     _id?: string | number;
-    author?: mongoose.Types.ObjectId;
-    publisher?: mongoose.Types.ObjectId;
+    author?: IAuthor;
+    publisher?: IPublisher;
     title: string;
     ISBN: string;
     genre: string[];

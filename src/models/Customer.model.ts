@@ -1,7 +1,9 @@
 import mongoose, { Schema, model, mongo } from 'mongoose';
 
+import { IOrder } from './Order.model';
+
 export interface ICustomer {
-    orders?: mongoose.Types.ObjectId;
+    orders?: IOrder[];
     firstName: string;
     lastName?: string;
     address: string;

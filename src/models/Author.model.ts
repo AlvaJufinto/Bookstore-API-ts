@@ -1,7 +1,8 @@
 import mongoose, { Schema, model } from 'mongoose';
+import { IBook } from './Book.model';
 
 export interface IAuthor {
-    books?: mongoose.Types.ObjectId;
+    books?: IBook[];
     firstName: string;
     lastName?: string;
     country: string;
