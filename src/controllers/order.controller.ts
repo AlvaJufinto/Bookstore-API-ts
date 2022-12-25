@@ -9,7 +9,7 @@ export async function addOrder(req: Request, res: Response) {
         let withId: boolean = req.query.withId === 'true' ? true : false;
         const { customer, books, ...restBody } = req.body;
         let formattedBooks: IBook[] = [];
-        let formattedOrders: IOrder[] = [];
+        // let formattedOrders: IOrder[] = [];
 
         if(withId) {
             const order: IOrder = await Order.create({
@@ -23,8 +23,6 @@ export async function addOrder(req: Request, res: Response) {
             books?.map(async (book: IBook) => {
                 formattedBooks?.push(await Book.findOne({ _id: book })?.lean());
             });
-
-            console.log(await formattedBooks)
 
             const orderCustomer: IOrder = await Customer.findOneAndUpdate(
                 { _id: customer },

@@ -1,4 +1,4 @@
-import jwt from "jsonwebtoken";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 export async function signJwt(id: string): Promise<string | boolean> {
     try {
@@ -7,22 +7,21 @@ export async function signJwt(id: string): Promise<string | boolean> {
         }, process.env.SECRET_TOKEN as string, {
             expiresIn: process.env.SECRET_TIMEOUT as string
         });
-    } catch (err) { 
-        console.log(err);
+    } catch (err) {
         return false;
     }
 }
 
 export async function verifyJwt(token: string) {
     try {
-        const decoded = await jwt.verify(token, process.env.SECRET_TOKEN as string);
+        const decoded: string | JwtPayload = await jwt.verify(token, process.env.SECRET_TOKEN as string);
 
         return {
             valid: true,
             expired: false, 
             decoded,
         }
-    } catch (err) {
+    } catch (err: any) {
         return {
             valid: false,
             expired: err,

@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 
-async function connect() {
+import Admin, { IAdmin } from "src/models/Admin.model";
+
+export async function connect() {
     const dbUri: string = process.env.DB_URI as string;
     
     try {
@@ -13,4 +15,17 @@ async function connect() {
     }
 }
 
-export default connect;
+export async function getAdminById(id: string) {
+    try {
+        let admin: IAdmin = await Admin.findOne({ 
+            _id: id    
+        }) as IAdmin;
+        
+        return admin;
+    } catch (err) {
+        console.log(err);
+        console.log("Can't find admin with that id");
+        process.exit(1);
+    }
+}
+

@@ -11,7 +11,7 @@ import adminRoute from './routes/admin.route';
 import bookRoute from './routes/book.route';
 import orderRoute from './routes/order.route';
 
-import connect from './utils/connect.util';
+import { connect } from './utils/connect.util';
 
 const port = process.env.PORT || 5000;
 const app = express();

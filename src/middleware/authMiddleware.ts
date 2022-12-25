@@ -1,7 +1,8 @@
 import { Request, Response, NextFunction } from "express";
 
-import Admin from "../models/Admin.model";
+import Admin, { IAdmin } from "../models/Admin.model";
 import { verifyJwt } from "../utils/jwt.util";
+import { getAdminById } from "src/utils/connect.util";
 
 export async function authentication(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
@@ -24,12 +25,7 @@ export async function authentication(req: Request, res: Response, next: NextFunc
 } 
 
 export async function authenticationAdmin(req: Request, res: Response, next: NextFunction) {
-    const adminId = res.locals.user.uid;
-    let admin;
-
-    admin = await Admin.findOne({ 
-        _id: adminId as string    
-    });
+    const admin: IAdmin = await getAdminById(res.locals.user.uid);
 
     if(admin?.role !== 'admin') {
         return res.status(403).json({
@@ -41,12 +37,7 @@ export async function authenticationAdmin(req: Request, res: Response, next: Nex
 } 
 
 export async function authenticationViewer(req: Request, res: Response, next: NextFunction) {
-    const adminId = res.locals.user.uid;
-    let admin;
-    
-    admin = await Admin.findOne({ 
-        _id: adminId as string    
-    });
+    const admin: IAdmin = await getAdminById(res.locals.user.uid);
 
     if(admin?.role === 'viewer') {
         return res.status(403).json({

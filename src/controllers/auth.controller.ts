@@ -1,21 +1,20 @@
 import { Request, Response } from "express";
 import bcrypt from "bcrypt";
 
-import Admin from "./../models/Admin.model";
+import Admin, { IAdmin } from "./../models/Admin.model";
 import { signJwt } from "./../utils/jwt.util";
+import { getAdminById } from "src/utils/connect.util";
 
 export async function authLogin(req: Request, res: Response) {
     const { username, password } = req.body;
 
-    let admin;
-
-    admin = await Admin.findOne({ 
+    const admin: IAdmin = await Admin.findOne({ 
         username: username as string    
-    });
+    }) as IAdmin;
 
     if(admin) {
-        const match = await bcrypt.compare(password, admin.password);
-        const token = await signJwt(admin._id as unknown as string);
+        const match: boolean = await bcrypt.compare(password, admin.password);
+        const token: string | boolean = await signJwt(admin._id as unknown as string);
 
         if(match) {
             return res.status(200).json({
@@ -32,10 +31,7 @@ export async function authLogin(req: Request, res: Response) {
 } 
 
 export async function authData(req: Request, res: Response) {
-    const adminId: string = res.locals.user.uid;
-    const admin = await Admin.findOne({
-        id: adminId
-    });
+    const admin: IAdmin = await getAdminById(res.locals.user.uid);
 
     if(admin) {
         return res.status(200).json({
