@@ -450,7 +450,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/order/add?withId=true",
+							"raw": "{{endpoint}}/order/add?withCustomerIdIdIdIdIdIdIdId=true",
 							"host": [
 								"{{endpoint}}"
 							],
@@ -460,11 +460,11 @@
 							],
 							"query": [
 								{
-									"key": "withId",
+									"key": "withCustomerIdId",
 									"value": "true"
 								},
 								{
-									"key": "withId",
+									"key": "withCustomerIdId",
 									"value": "False",
 									"disabled": true
 								}

@@ -26,22 +26,22 @@ export function validateAddAdmin(req: Request, res: Response, next: NextFunction
 }
 
 export function validateQuery(req: Request, res: Response, next: NextFunction) {
-    const { withId } = req.query;
+    const { withCustomerId } = req.query;
 
-    if(withId === undefined) {
+    if(withCustomerId === undefined) {
         return res.status(400).json({
             ok: false,
-            message: "You have to add '?withId=' after route",
+            message: "You have to add '?withCustomerId=' after route",
         })
     }
 
-    if(withId === "true" || withId === "false") {
+    if(withCustomerId === "true" || withCustomerId === "false") {
         return next();
     }
     
     return res.status(400).json({
         ok: false,
-        message: "'?withId=' value must be 'true' OR 'false'",
+        message: "'?withCustomerId=' value must be 'true' OR 'false'",
     })
 }
 
