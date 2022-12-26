@@ -10,6 +10,7 @@ import authRoute from './routes/auth.router';
 import adminRoute from './routes/admin.route';
 import bookRoute from './routes/book.route';
 import orderRoute from './routes/order.route';
+import customerRoute from './routes/customer.route';
 
 import { connect } from './utils/connect.util';
 
@@ -31,6 +32,7 @@ app.use('/api/auth', authRoute);
 app.use('/api/admin', adminRoute);
 app.use('/api/book', bookRoute);
 app.use('/api/order', orderRoute);
+app.use('/api/customer', customerRoute);
 
 app.use((req: Request, res: Response) => {
     // Invalid request

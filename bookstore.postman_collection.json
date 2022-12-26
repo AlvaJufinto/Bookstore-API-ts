@@ -442,7 +442,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"books\": [\"63a5bbb1cb38c5cafd5a9a83\"],\r\n    \"customer\": \"63a6855068b1fc80f43d222e\"\r\n}",
+							"raw": "{\r\n    \"books\": [\r\n        {\r\n            \"_id\": \"63a5bbb1cb38c5cafd5a9a83\",\r\n            \"quantity\": 99\r\n        }, \r\n    ],\r\n    \"customer\": {\r\n        \"firstName\": \"Bagas\",\r\n        \"lastName\": \"Basana\",\r\n        \"address\": \"Jl. Puloasem\",\r\n        \"postalCode\": \"13210\",\r\n        \"country\": \"newCustomer.country\",\r\n        \"province\": \"DKI Jakarta\",\r\n        \"phoneNumber\": \"081128339281\"\r\n    },\r\n    \"country\": \"Indonesia\",\r\n    \"shippingName\": \"JNT\",\r\n    \"total\": 75\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -450,7 +450,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/order/add?withCustomerIdIdIdIdIdIdIdId=true",
+							"raw": "{{endpoint}}/order/add?withCustomerId=false",
 							"host": [
 								"{{endpoint}}"
 							],
@@ -460,13 +460,8 @@
 							],
 							"query": [
 								{
-									"key": "withCustomerIdId",
-									"value": "true"
-								},
-								{
-									"key": "withCustomerIdId",
-									"value": "False",
-									"disabled": true
+									"key": "withCustomerId",
+									"value": "false"
 								}
 							]
 						}
@@ -533,14 +528,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/order/show/63a43d3cbd2c9689964a42d6",
+							"raw": "{{endpoint}}/order/show/63a69e3e43d1ddfb1234ec6f",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"order",
 								"show",
-								"63a43d3cbd2c9689964a42d6"
+								"63a69e3e43d1ddfb1234ec6f"
 							]
 						}
 					},
