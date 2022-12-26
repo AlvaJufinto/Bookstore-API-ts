@@ -13,16 +13,11 @@ export async function addOrder(req: Request, res: Response) {
     try {
         let withId: boolean = req.query.withId === 'true' ? true : false;
         let formattedBooks: IBook[] = [];
-        let formattedInputBooks: string[] = [];
         let totalPrice: number = 0;
 
         // CLEAN UP CODE FOR THIS
         if(withId) {
             const { customer, books, ...restBody } = req.body;
-            
-            books.map(async (book: IInputBooks) => {
-                formattedInputBooks.push(book?._id);
-            })
 
             books.map(async (book: IInputBooks) => {
                 formattedBooks.push(await Book.findOne({ _id: book?._id }).lean());
@@ -30,7 +25,7 @@ export async function addOrder(req: Request, res: Response) {
 
             const order: IOrder = await Order.create({
                 customer,   
-                books: formattedInputBooks,
+                books,
                 ...restBody
             }); 
             
