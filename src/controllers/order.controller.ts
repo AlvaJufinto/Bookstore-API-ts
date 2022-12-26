@@ -4,22 +4,16 @@ import Order, { IOrder } from "../models/Order.model";
 import Book, { IBook } from "../models/Book.model";
 import Customer, { ICustomer } from "../models/Customer.model";
 
-interface IInputBooks {
-    _id: string;
-    quantity: number;
-} 
-
 export async function addOrder(req: Request, res: Response) {
     try {
         let withCustomerId: boolean = req.query.withCustomerId === 'true' ? true : false;
         let formattedBooks: IBook[] = [];
         let totalPrice: number = 0;
 
-        // CLEAN UP CODE FOR THIS
         if(withCustomerId) {
             const { customer, books, ...restBody } = req.body;
 
-            books.map(async (book: IInputBooks) => {
+            books.map(async (book: IBook) => {
                 formattedBooks.push(await Book.findOne({ _id: book?._id }).lean());
             })
 
@@ -76,7 +70,7 @@ export async function addOrder(req: Request, res: Response) {
             phoneNumber: newCustomer.phoneNumber
         })
         
-        books.map(async (book: IInputBooks) => {
+        books.map(async (book: IBook) => {
             formattedBooks.push(await Book.findOne({ _id: book?._id }).lean());
         })
 
