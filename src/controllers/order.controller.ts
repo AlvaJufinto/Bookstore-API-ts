@@ -39,10 +39,6 @@ export async function addOrder(req: Request, res: Response) {
                 console.log("asdsad", books[index]);
             });
             
-            console.log(formattedBooks)
-            console.log(totalPrice)
-            
-            
             const orderCustomer: IOrder = await Customer.findOneAndUpdate(
                 { _id: customer },
                 { 
@@ -53,12 +49,12 @@ export async function addOrder(req: Request, res: Response) {
                 { new: true, useFindAndModify: false }
                 ).lean();
                 
-            const { customer: customerOrder, books: booksOrder, ...restOrder } = order.toObject();;
+            const { customer: customerOrder, books: booksOrder, ...restOrder } = order.toObject();
                 
             await Order.findOneAndUpdate(
                 { _id: order._id },
                 {
-                        total: totalPrice,
+                    total: totalPrice,
                 },
                 { new: true, useFindAndModify: false }
             ).lean(); 

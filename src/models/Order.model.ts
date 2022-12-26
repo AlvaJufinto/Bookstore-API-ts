@@ -16,12 +16,14 @@ export interface IOrder {
 const OrderSchema = new Schema<IOrder>({
     books: [
         {
-            type: Number,
-            required: [true, "Quantity needs to be filled"],
-        },
-        {
-            type : mongoose.Types.ObjectId,
-            ref : "Book"
+            quantity: {
+                type: Number,
+                required: [true, "Quantity needs to be filled"],
+            },
+            _id: {
+                type : mongoose.Types.ObjectId,
+                ref : "Book"
+            }
         }
     ],
     customer: {
