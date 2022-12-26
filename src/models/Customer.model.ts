@@ -12,6 +12,7 @@ export interface ICustomer {
     country: string;
     province: string;
     phoneNumber: string;
+    toObject(): ICustomer;
 }
 
 const CustomerSchema = new Schema<ICustomer>({

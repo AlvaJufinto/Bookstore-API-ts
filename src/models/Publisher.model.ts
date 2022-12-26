@@ -7,6 +7,7 @@ export interface IPublisher {
     books?: IBook;
     name: string;
     country: string;
+    toObject?: IPublisher;
 }
 
 const PublisherSchema = new Schema<IPublisher>({

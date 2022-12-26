@@ -2,28 +2,47 @@ import { Request, Response } from "express";
 
 import Order, { IOrder } from "../models/Order.model";
 import Book, { IBook } from "../models/Book.model";
-import Customer from "../models/Customer.model";
+import Customer, { ICustomer } from "../models/Customer.model";
 
 export async function addOrder(req: Request, res: Response) {
+    interface IInputBooks {
+        _id: string;
+        quantity: number;
+    } 
+
     try {
         let withId: boolean = req.query.withId === 'true' ? true : false;
-        const { customer, books, ...restBody } = req.body;
         let formattedBooks: IBook[] = [];
-        // let formattedOrders: IOrder[] = [];
+        let formattedInputBooks: string[] = [];
+        let totalPrice: number = 0;
 
+        // CLEAN UP CODE FOR THIS
         if(withId) {
+            const { customer, books, ...restBody } = req.body;
+            
+            books.map(async (book: IInputBooks) => {
+                formattedInputBooks.push(book?._id);
+            })
+
+            books.map(async (book: IInputBooks) => {
+                formattedBooks.push(await Book.findOne({ _id: book?._id }).lean());
+            })
+
             const order: IOrder = await Order.create({
-                customer,
-                books: {
-                    _id: req.params.id,
-                },
+                customer,   
+                books: formattedInputBooks,
                 ...restBody
             }); 
-
-            books?.map(async (book: IBook) => {
-                formattedBooks?.push(await Book.findOne({ _id: book })?.lean());
+            
+            formattedBooks?.map((formattedBook: IBook, index: number) => {
+                totalPrice += formattedBook.price * books[index].quantity;
+                console.log("asdsad", books[index]);
             });
-
+            
+            console.log(formattedBooks)
+            console.log(totalPrice)
+            
+            
             const orderCustomer: IOrder = await Customer.findOneAndUpdate(
                 { _id: customer },
                 { 
@@ -32,14 +51,23 @@ export async function addOrder(req: Request, res: Response) {
                     } 
                 },
                 { new: true, useFindAndModify: false }
-            ).lean();
+                ).lean();
                 
-            const { customer: customerOrder, books: booksOrder, ...restOrder } = order;
-            
+            const { customer: customerOrder, books: booksOrder, ...restOrder } = order.toObject();;
+                
+            await Order.findOneAndUpdate(
+                { _id: order._id },
+                {
+                        total: totalPrice,
+                },
+                { new: true, useFindAndModify: false }
+            ).lean(); 
+
             return res.status(200).json({
                 ok: true,
                 messsage: {
                     ...restOrder,
+                    total: totalPrice,
                     books: formattedBooks,
                     customer: orderCustomer
                 }
@@ -47,6 +75,18 @@ export async function addOrder(req: Request, res: Response) {
         }
 
         // TODO: Make order without ID
+        const { customer: newCustomer, books, ...restBody } = req.body;
+            // const customer: ICustomer = Order.create({
+
+            // }) 
+        
+            // const order: IOrder = await Order.create({
+            //     customer,
+            //     books: {
+            //         _id: req.params.id,
+            //     },
+            //     ...restBody
+            // }); 
 
         // return res.status(200).json({
         //     ok: false,

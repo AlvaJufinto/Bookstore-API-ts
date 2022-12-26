@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 import Admin, { IAdmin } from "./../models/Admin.model";
 import { signJwt } from "./../utils/jwt.util";
-import { getAdminById } from "src/utils/connect.util";
+import { getAdminById } from "..//utils/connect.util";
 
 export async function authLogin(req: Request, res: Response) {
     const { username, password } = req.body;

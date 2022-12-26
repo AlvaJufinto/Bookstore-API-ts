@@ -14,7 +14,7 @@ export function validateLogin(req: Request, res: Response, next: NextFunction) {
 }
 
 export function validateAddAdmin(req: Request, res: Response, next: NextFunction) {
-    const { username, fullname, password, description, role } = req.body;
+    const { username } = req.body;
 
     if(username.includes(" ")) {
         return res.status(400).json({

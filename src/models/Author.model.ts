@@ -7,6 +7,7 @@ export interface IAuthor {
     firstName: string;
     lastName?: string;
     country: string;
+    toObject(): IAuthor;
 } 
 
 const AuthorSchema = new Schema<IAuthor>({

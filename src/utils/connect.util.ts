@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-import Admin, { IAdmin } from "src/models/Admin.model";
+import Admin, { IAdmin } from "../models/Admin.model";
 
 export async function connect() {
     const dbUri: string = process.env.DB_URI as string;
