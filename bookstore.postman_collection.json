@@ -54,13 +54,13 @@
 							}
 						],
 						"url": {
-							"raw": "{{endpoint}}/auth/get-data",
+							"raw": "{{endpoint}}/auth/get",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"auth",
-								"get-data"
+								"get"
 							]
 						}
 					},
@@ -164,14 +164,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/admin/show/63a5a29e58595f8740e7d8e9",
+							"raw": "{{endpoint}}/admin/show/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"admin",
 								"show",
-								"63a5a29e58595f8740e7d8e9"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -198,14 +204,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/admin/delete/63a5a22d32497fc5a73449fd",
+							"raw": "{{endpoint}}/admin/delete/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"admin",
 								"delete",
-								"63a5a22d32497fc5a73449fd"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -232,14 +244,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/admin/edit/63a5a29e58595f8740e7d8e9",
+							"raw": "{{endpoint}}/admin/edit/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"admin",
 								"edit",
-								"63a5a29e58595f8740e7d8e9"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -343,14 +361,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/book/show/63a5a01d03b5858d10387ces4",
+							"raw": "{{endpoint}}/book/show/;id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"book",
 								"show",
-								"63a5a01d03b5858d10387ces4"
+								";id"
 							]
 						}
 					},
@@ -377,14 +395,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/book/delete/63a5b22d91b1e1b0b3c1a0ca",
+							"raw": "{{endpoint}}/book/delete/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"book",
 								"delete",
-								"63a5b22d91b1e1b0b3c1a0ca"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -411,14 +435,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/book/edit/63a5bbb1cb38c5cafd5a9a83",
+							"raw": "{{endpoint}}/book/edit/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"book",
 								"edit",
-								"63a5bbb1cb38c5cafd5a9a83"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -442,7 +472,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"books\": [\r\n        {\r\n            \"_id\": \"63a5bbb1cb38c5cafd5a9a83\",\r\n            \"quantity\": 99\r\n        }, \r\n    ],\r\n    \"customer\": {\r\n        \"firstName\": \"Bagas\",\r\n        \"lastName\": \"Basana\",\r\n        \"address\": \"Jl. Puloasem\",\r\n        \"postalCode\": \"13210\",\r\n        \"country\": \"newCustomer.country\",\r\n        \"province\": \"DKI Jakarta\",\r\n        \"phoneNumber\": \"081128339281\"\r\n    },\r\n    \"country\": \"Indonesia\",\r\n    \"shippingName\": \"JNT\",\r\n    \"total\": 75\r\n}",
+							"raw": "{\r\n    \"books\": [\r\n        {\r\n            \"_id\": \"63a5bbb1cb38c5cafd5a9a83\",\r\n            \"quantity\": 20\r\n        }\r\n    ],\r\n    \"customer\": \"63a9479d6bfec97748b281de\",\r\n    \"country\": \"Indonesia\",\r\n    \"shippingName\": \"JNT\",\r\n    \"total\": 75\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -450,7 +480,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/order/add?withCustomerId=false",
+							"raw": "{{endpoint}}/order/add?withCustomerId=true",
 							"host": [
 								"{{endpoint}}"
 							],
@@ -461,7 +491,7 @@
 							"query": [
 								{
 									"key": "withCustomerId",
-									"value": "false"
+									"value": "true"
 								}
 							]
 						}
@@ -528,14 +558,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/order/show/63a69e3e43d1ddfb1234ec6f",
+							"raw": "{{endpoint}}/order/show/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"order",
 								"show",
-								"63a69e3e43d1ddfb1234ec6f"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
 							]
 						}
 					},
@@ -562,14 +598,20 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/order/delete/63a7331bab52a20794bde531",
+							"raw": "{{endpoint}}/order/delete/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"order",
 								"delete",
-								"63a7331bab52a20794bde531"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
 							]
 						}
 					},
@@ -588,7 +630,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"country\": \"UK\",\r\n    \"shippingName\": \"UK Express\"\r\n}",
+							"raw": "{\r\n    \"books\": [\r\n        {\r\n            \"_id\": \"63a5bbb1cb38c5cafd5a9a83\",\r\n            \"quantity\": 100\r\n        }, \r\n        {\r\n            \"_id\": \"63a69288f972d229afc27227\",\r\n            \"quantity\": 8\r\n        }\r\n    ],\r\n    \"customer\": \"63a6855068b1fc80f43d222e\",\r\n    \"country\": \"Indonesia\",\r\n    \"shippingName\": \"JNT\",\r\n    \"total\": 75\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -596,14 +638,217 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/order/edit/63a7354dc69823198ec4c6a4",
+							"raw": "{{endpoint}}/order/edit/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"order",
 								"edit",
-								"63a7354dc69823198ec4c6a4"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "Add Customer",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jerome\",\r\n    \"lastName\": \"Moreno\",\r\n    \"address\": \"Jl. Pulomas Timur\",\r\n    \"postalCode\": \"14220\",\r\n    \"country\": \"Indonesia\",\r\n    \"province\": \"DKI Jakarta\",\r\n    \"phoneNumber\": \"08923282812\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/customer/add",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"customer",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Customers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/customer/show",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"customer",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Specific Customer",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/customer/show/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"customer",
+								"show",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63aafa06263b7168c604e3a7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Customer",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/customer/delete/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"customer",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Customers",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Jerome\",\r\n    \"lastName\": \"Moreno\",\r\n    \"address\": \"Jl. Pulomas Timur\",\r\n    \"postalCode\": \"14220\",\r\n    \"country\": \"Cina\",\r\n    \"province\": \"DKI Jakarta\",\r\n    \"phoneNumber\": \"08923282812\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/customer/edit/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"customer",
+								"edit",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63aafa06263b7168c604e3a7"
+								}
 							]
 						}
 					},
