@@ -101,7 +101,7 @@ export async function editAdmin(req: Request, res: Response) {
         return res.status(200).json({
             ok: true,
             message: `${admin.username} edited successfully`,
-            data: { ...admin }
+            data: admin
         });
     } catch (err) {
         return res.status(404).json({

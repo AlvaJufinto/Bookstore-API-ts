@@ -95,11 +95,25 @@ export async function deleteCustomer(req: Request, res: Response) {
 
 export async function editCustomer(req: Request, res: Response) {
     try {
+        const customer: ICustomer = await Customer.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { 
+                $set: {     
+                    ...req.body
+                }
+            }, 
+            { new: true }
+        ) as ICustomer;
         
+        return res.status(200).json({
+            ok: true,
+            message: `${customer.firstName} ${customer.lastName} edited successfully`,
+            data: customer,
+        });
     } catch (err) {
-        return res.status(404).json({
+        return res.status(400).json({
             ok: false,
-            message: "Sorry, we can't edit that Customer",
+            message: `Sorry, we can't edit that Customer ${err}`,
         })
     }
 } 

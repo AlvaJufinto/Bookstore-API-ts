@@ -4,9 +4,9 @@ import { IOrder } from './Order.model';
 
 export interface ICustomer {
     _id?: string | number;
-    orders?: IOrder[];
+    orders: IOrder[];
     firstName: string;
-    lastName?: string;
+    lastName: string;
     address: string;
     postalCode: string;
     country: string;

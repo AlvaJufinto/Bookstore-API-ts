@@ -57,3 +57,16 @@ export function validateEditOrder(req: Request, res: Response, next: NextFunctio
     
     next()
 }
+
+export function validateEditCustomer(req: Request, res: Response, next: NextFunction) {
+    const { orders } = req.body;
+
+    if(orders) {
+        return res.status(400).json({
+            ok: false,
+            message: "You can't edit customer's orders",
+        })
+    }
+    
+    next()
+}
