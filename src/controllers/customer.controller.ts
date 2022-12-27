@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
 import Customer, { ICustomer } from "../models/Customer.model";
+import Order, { IOrder } from "../models/Order.model";
 
 export async function addCustomer(req: Request, res: Response) {
     try {
@@ -23,7 +24,15 @@ export async function addCustomer(req: Request, res: Response) {
 
 export async function showAllCustomer(req: Request, res: Response) {
     try {
-        
+        const customers: ICustomer[] = await Customer.find()
+            .populate("orders")
+            .lean();
+
+        return res.status(200).json({
+            ok: true,
+            message: "Customers fetched successfully",
+            data: customers,
+        });
     } catch (err: any) {
         
     }
