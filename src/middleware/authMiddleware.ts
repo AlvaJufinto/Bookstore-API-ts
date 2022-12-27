@@ -1,11 +1,12 @@
 import { Request, Response, NextFunction } from "express";
 
-import Admin, { IAdmin } from "../models/Admin.model";
+import { IAdmin } from "../models/Admin.model";
 import { verifyJwt } from "../utils/jwt.util";
 import { getAdminById } from "../utils/connect.util";
 
 export async function authentication(req: Request, res: Response, next: NextFunction) {
     const { authorization } = req.headers;
+    
     if(authorization) {
         const authToken = authorization.split(" ")[1];
         const { decoded } = await verifyJwt(authToken);

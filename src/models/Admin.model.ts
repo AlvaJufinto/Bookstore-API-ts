@@ -1,5 +1,5 @@
 import { NextFunction } from 'express';
-import mongoose, { Schema, model } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 import bcrypt from 'bcrypt';
 
 export interface IAdmin {

@@ -1,4 +1,4 @@
-import mongoose, { Schema, model } from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
 import { IAuthor } from "../models/Author.model";
 import { IPublisher } from "../models/Publisher.model";

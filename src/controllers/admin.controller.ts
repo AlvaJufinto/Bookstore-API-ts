@@ -95,7 +95,7 @@ export async function editAdmin(req: Request, res: Response) {
                     ...req.body
                 }
             }, 
-            { new: true }
+            { new: true }   
         ).lean();
         
         return res.status(200).json({
