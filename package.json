@@ -1,5 +1,5 @@
 {
-  "name": "web-scraper",
+  "name": "bookstore.ts",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,7 +8,7 @@
     "start": "ts-node src/index.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "AlvaJufinto",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

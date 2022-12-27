@@ -29,7 +29,6 @@ const CustomerSchema = new Schema<ICustomer>({
     lastName: {
         type: String,
         required: [true, "Last Name needs to be filled"],
-        unique: true,
     },
     address: {
         type: String,

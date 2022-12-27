@@ -4,7 +4,15 @@ import Customer, { ICustomer } from "../models/Customer.model";
 
 export async function addCustomer(req: Request, res: Response) {
     try {
-       
+        const customer: ICustomer = await Customer.create({
+            ...req.body
+        });
+    
+        return res.status(200).json({
+            ok: true,
+            message: "Customer added successfully",
+            data: customer,
+        });
     } catch (err: any) {
         return res.status(400).json({
             ok: false,

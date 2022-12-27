@@ -24,7 +24,6 @@ const AuthorSchema = new Schema<IAuthor>({
     lastName: {
         type: String,
         required: [true, "Firstname needs to be filled"],
-        unique: true,
     },
     country: {
         type: String,
