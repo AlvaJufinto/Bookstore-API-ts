@@ -72,7 +72,7 @@
 			"name": "Admin",
 			"item": [
 				{
-					"name": "Add Admin",
+					"name": "Add",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -105,7 +105,7 @@
 					"response": []
 				},
 				{
-					"name": "Show Admins",
+					"name": "Show All",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -141,7 +141,7 @@
 					"response": []
 				},
 				{
-					"name": "Show Specific Admin",
+					"name": "Show Specific",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -184,7 +184,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Admin",
+					"name": "Delete",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -216,7 +216,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": "63a5a29e58595f8740e7d8e9"
 								}
 							]
 						}
@@ -224,7 +224,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Admin",
+					"name": "Edit",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -269,7 +269,7 @@
 			"name": "Book",
 			"item": [
 				{
-					"name": "Add Book",
+					"name": "Add",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -302,7 +302,7 @@
 					"response": []
 				},
 				{
-					"name": "Show Books",
+					"name": "Show All",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -338,7 +338,7 @@
 					"response": []
 				},
 				{
-					"name": "Show Specific Book",
+					"name": "Show Specific",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -361,21 +361,27 @@
 							}
 						},
 						"url": {
-							"raw": "{{endpoint}}/book/show/;id",
+							"raw": "{{endpoint}}/book/show/:id",
 							"host": [
 								"{{endpoint}}"
 							],
 							"path": [
 								"book",
 								"show",
-								";id"
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63a69288f972d229afc27227"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Delete Book",
+					"name": "Delete",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -415,7 +421,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Book",
+					"name": "Edit",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -460,7 +466,7 @@
 			"name": "Order",
 			"item": [
 				{
-					"name": "Add Order",
+					"name": "Add",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -499,7 +505,7 @@
 					"response": []
 				},
 				{
-					"name": "Show Orders",
+					"name": "Show All",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -663,7 +669,7 @@
 			"name": "Customer",
 			"item": [
 				{
-					"name": "Add Customer",
+					"name": "Add",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -696,7 +702,7 @@
 					"response": []
 				},
 				{
-					"name": "Show Customers",
+					"name": "Show All",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -732,7 +738,7 @@
 					"response": []
 				},
 				{
-					"name": "Show Specific Customer",
+					"name": "Show Specific",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -775,7 +781,7 @@
 					"response": []
 				},
 				{
-					"name": "Delete Customer",
+					"name": "Delete",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -815,7 +821,7 @@
 					"response": []
 				},
 				{
-					"name": "Edit Customers",
+					"name": "Edit",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -848,6 +854,203 @@
 								{
 									"key": "id",
 									"value": "63aafa06263b7168c604e3a7"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Tere\",\r\n    \"lastName\": \"Liye\",\r\n    \"country\": \"Indonesia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/author/add",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"author",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/author/show",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"author",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Specific",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/author/show/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"author",
+								"show",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63ac1b72992a8d693c37384f"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/author/delete/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"author",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63ac17f22fcbf838e1babac1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Stanislaus\",\r\n    \"lastName\": \"Alva\",\r\n    \"country\": \"Indonesia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/author/edit/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"author",
+								"edit",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63a5960992bf4ead7168eec6"
 								}
 							]
 						}
