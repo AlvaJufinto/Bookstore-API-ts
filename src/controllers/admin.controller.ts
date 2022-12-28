@@ -76,7 +76,7 @@ export async function deleteAdmin(req: Request, res: Response) {
         return res.status(200).json({
             ok: true,
             message: `${admin.username} deleted successfully`,
-            data: { ...admin }
+            data: admin
         });
     } catch (err: any) {
         return res.status(404).json({
