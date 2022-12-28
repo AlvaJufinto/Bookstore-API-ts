@@ -4,7 +4,7 @@ import { IAuthor } from "../models/Author.model";
 import { IPublisher } from "../models/Publisher.model";
 
 export interface IBook {
-    _id?: string | number;
+    _id: string | number;
     author?: IAuthor;
     publisher?: IPublisher;
     title: string;

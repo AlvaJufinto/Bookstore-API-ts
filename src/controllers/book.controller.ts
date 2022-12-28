@@ -192,17 +192,15 @@ export async function editBook(req: Request, res: Response) {
             { new: true }
 
         )
-        .populate("author")
-        .populate("publisher")
-        .lean(); 
+            .populate("author")
+            .populate("publisher")
+            .lean(); 
 
 
         return res.status(200).json({
             ok: true,
             message: `${book?.title} edited successfully`,
-            data: { 
-                ...book
-            } 
+            data: book
         });
 
     } catch (err: any) {

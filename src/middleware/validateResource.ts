@@ -45,7 +45,7 @@ export function validateQuery(req: Request, res: Response, next: NextFunction) {
     })
 }
 
-export function validateEditOrder(req: Request, res: Response, next: NextFunction) {
+export function validateEdit(req: Request, res: Response, next: NextFunction) {
     const { books, customer, total } = req.body;
 
     if(books || customer || total) {

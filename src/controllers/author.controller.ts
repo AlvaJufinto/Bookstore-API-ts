@@ -97,11 +97,22 @@ export async function deleteAuthor(req: Request, res: Response) {
 
 export async function editAuthor(req: Request, res: Response) {
     try {
+        const { books, ...restAuthor } = req.body;        
+
+        const author: IAuthor = await Author.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { 
+                $set: restAuthor 
+            },
+            { new: true }
+        )
+            .populate("books")
+            .lean(); 
 
         return res.status(200).json({
             ok: true,
-            message: ` edited successfully`,
-            data: {  } 
+            message: `Author edited successfully`,
+            data: author
         });
 
     } catch (err: any) {
