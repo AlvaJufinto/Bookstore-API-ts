@@ -9,7 +9,7 @@ export interface IAdmin {
     password: string;
     description: string;
     role: string;
-    toObject(): IAdmin;
+    toObject: () => IAdmin;
 } 
 
 const AdminSchema = new Schema<IAdmin>({

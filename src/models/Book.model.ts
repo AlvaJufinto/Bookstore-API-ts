@@ -12,7 +12,7 @@ export interface IBook {
     genre: string[];
     publicationDate: Date;
     price: number;
-    toObject(): IBook;
+    toObject: () => IBook;
 }
 
 const BookSchema = new Schema<IBook>({

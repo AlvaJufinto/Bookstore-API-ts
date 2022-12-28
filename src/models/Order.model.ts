@@ -10,7 +10,7 @@ export interface IOrder {
     country: string;
     total: number;
     shippingName: string;
-    toObject(): IOrder;
+    toObject: () => IOrder;
 }
 
 const OrderSchema = new Schema<IOrder>({

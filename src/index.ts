@@ -11,6 +11,7 @@ import adminRoute from './routes/admin.route';
 import bookRoute from './routes/book.route';
 import orderRoute from './routes/order.route';
 import customerRoute from './routes/customer.route';
+import authorRoute from './routes/author.route';
 
 import { connect } from './utils/connect.util';
 
@@ -33,6 +34,7 @@ app.use('/api/admin', adminRoute);
 app.use('/api/book', bookRoute);
 app.use('/api/order', orderRoute);
 app.use('/api/customer', customerRoute);
+app.use('/api/author', authorRoute);
 
 app.use((req: Request, res: Response) => {
     // Invalid request
