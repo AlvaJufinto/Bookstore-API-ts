@@ -95,6 +95,23 @@ export async function deletePublisher(req: Request, res: Response) {
 
 export async function editPublisher(req: Request, res: Response) {
     try {
+        const { books, ...restPublisher } = req.body;        
+
+        const publisher: IPublisher = await Publisher.findOneAndUpdate(
+            { _id: req.params.id }, 
+            { 
+                $set: restPublisher 
+            },
+            { new: true }
+        )
+            .populate("books")
+            .lean(); 
+
+        return res.status(200).json({
+            ok: true,
+            message: "publisher edited successfully",
+            data: publisher
+        });
     } catch (err) {
         return res.status(404).json({
             ok: false,
