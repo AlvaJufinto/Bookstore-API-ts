@@ -433,7 +433,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"author\": \"63a5960992bf4ead7168eec6\",\r\n    \"publisher\": \"63a5965592bf4ead7168eec7z\",\r\n    \"title\": \"1002 Way to Become Mafia in Birmingham\"\r\n}",
+							"raw": "{\r\n    \"author\": \"63a5960992bf4ead7168eec6\",\r\n    \"publisher\": \"63ae6381c4c62b6cc2285d8f\",\r\n    \"title\": \"1001 Way to Become Mafia in Birmingham\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -453,7 +453,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
+									"value": "63a5bbb1cb38c5cafd5a9a83"
 								}
 							]
 						}
@@ -878,7 +878,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"firstName\": \"Tere\",\r\n    \"lastName\": \"Liye\",\r\n    \"country\": \"Indonesia\"\r\n}",
+							"raw": "{\r\n    \"books\": [\"123123123123\"],\r\n    \"firstName\": \"asdasd\",\r\n    \"lastName\": \"Liye\",\r\n    \"country\": \"Indonesia\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1051,6 +1051,203 @@
 								{
 									"key": "id",
 									"value": "63a5960992bf4ead7168eec6"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Publisher",
+			"item": [
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"books\": [\"123123123123\"],\r\n    \"name\": \"Dem Books\",\r\n    \"country\": \"USA\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/publisher/add",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"publisher",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show All",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/publisher/show",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"publisher",
+								"show"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Show Specific",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/publisher/show/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"publisher",
+								"show",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63a5965592bf4ead7168eec7"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/publisher/delete/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"publisher",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63a5ac6192bf4ead7168eecb"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "authorization",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Dark Distributor\",\r\n    \"country\": \"Africa\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/publisher/edit/:id",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"publisher",
+								"edit",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "63ae6381c4c62b6cc2285d8f"
 								}
 							]
 						}
