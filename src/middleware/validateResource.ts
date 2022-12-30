@@ -45,26 +45,13 @@ export function validateQuery(req: Request, res: Response, next: NextFunction) {
     })
 }
 
-export function validateEdit(req: Request, res: Response, next: NextFunction) {
-    const { books, customer, total } = req.body;
+export function validateBody(req: Request, res: Response, next: NextFunction) {
+    const { books, customer, total, orders } = req.body;
 
-    if(books || customer || total) {
+    if(books || customer || total || orders) {
         return res.status(400).json({
             ok: false,
-            message: "You can't edit books, customer, and total",
-        })
-    }
-    
-    next()
-}
-
-export function validateEditCustomer(req: Request, res: Response, next: NextFunction) {
-    const { orders } = req.body;
-
-    if(orders) {
-        return res.status(400).json({
-            ok: false,
-            message: "You can't edit customer's orders",
+            message: "You can't add/edit books, customer, orders, and total",
         })
     }
     

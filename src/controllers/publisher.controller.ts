@@ -4,6 +4,17 @@ import Publisher, { IPublisher } from "../models/Publisher.model";
 
 export async function addPublisher(req: Request, res: Response) {
     try {
+        const { books, ...restPublishers } = req.body;
+
+        const publisher: IPublisher = await Publisher.create({
+            ...req.body
+        })
+
+        return res.status(200).json({
+            ok: true,
+            message: "Publisher added successfully",
+            data: publisher, 
+        });
     } catch (err: any) {
         return res.status(400).json({
             ok: false,
