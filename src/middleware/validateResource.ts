@@ -51,7 +51,7 @@ export function validateBody(req: Request, res: Response, next: NextFunction) {
     if(books || customer || total || orders) {
         return res.status(400).json({
             ok: false,
-            message: "You can't add/edit books, customer, orders, and total",
+            message: "You can't add or edit books, customer, orders, and total",
         })
     }
     

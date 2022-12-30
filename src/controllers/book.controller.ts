@@ -85,9 +85,7 @@ export async function showBook(req: Request, res: Response) {
         return res.status(200).json({
             ok: true,
             message: `${book.title} fetched successfully`,
-            data: { 
-                ...book,
-            } 
+            data: book,
         });
 
     } catch (err: any) {

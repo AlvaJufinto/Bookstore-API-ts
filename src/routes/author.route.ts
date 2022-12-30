@@ -9,7 +9,7 @@ const authorRoute = Router();
 
 authorRoute.get('/show', authentication, showAllAuthor);
 authorRoute.get('/show/:id', authentication, showAuthor);
-authorRoute.post('/add', authentication, authenticationViewer, addAuthor);
+authorRoute.post('/add', authentication, authenticationViewer, validateBody, addAuthor);
 authorRoute.delete('/delete/:id', authentication, authenticationViewer, deleteAuthor);
 authorRoute.put('/edit/:id', authentication, authenticationViewer, validateBody, editAuthor);
  
